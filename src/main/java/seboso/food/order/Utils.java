@@ -1,13 +1,12 @@
+// Funções úteis para a execução do programa //
+// ////////////////////////////////////////////
+
 package seboso.food.order;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utils {
-    // Funções úteis para a execução do programa //
-    // ////////////////////////////////////////////
-
-
     // Pausa o programa até o usuário apertar <ENTER>
     public static void EsperarEnter() {
         Scanner s = new Scanner(System.in);
@@ -16,12 +15,11 @@ public class Utils {
     }
 
 
-    public static int ReceberInput() {
+    // Recebe um input do usuário do tipo int, com tratamento de dados para evitar crashar o programa
+    public static int ReceberInputInt() {
         Scanner s = new Scanner(System.in);
         int input;
         try {
-            // Usuário seleciona uma das opções fornecidas
-            System.out.print("Sua escolha: ");
             input = s.nextInt();
         } catch (InputMismatchException e) {
             // Usuário digita outra coisa sem ser um número inteiro
