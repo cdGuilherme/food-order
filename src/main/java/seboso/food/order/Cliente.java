@@ -8,6 +8,25 @@ package seboso.food.order;
  *
  * @author Alunos
  */
-public class Cliente {
-    
+
+
+public class Cliente extends Pessoa {
+
+    private int idade;
+    private String cpf;
+    private String telefone;
+    private String endereco;
+    private String numero;
+    private String bairro;
+    private String cidade;
+    private String cep;
+
+    public Cliente(String nome) {
+        super(nome);
+    }
+
+    @Override
+    public void executarFuncao() {
+        System.out.println(nome + " está chamando o garçom.");
+    }
 }

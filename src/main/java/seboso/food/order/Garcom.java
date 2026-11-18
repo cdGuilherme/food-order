@@ -4,10 +4,14 @@
  */
 package seboso.food.order;
 
-/**
- *
- * @author Alunos
- */
-public class Garcom {
-    
+public class Garcom extends Pessoa {
+
+    public Garcom(String nome) {
+        super(nome);
+    }
+
+    @Override
+    public void executarFuncao() {
+        System.out.println(nome + " está anotando o pedido.");
+    }
 }

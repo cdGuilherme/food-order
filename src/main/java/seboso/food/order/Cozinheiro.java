@@ -4,10 +4,16 @@
  */
 package seboso.food.order;
 
-/**
- *
- * @author Alunos
- */
-public class Cozinheiro {
-    
+
+public class Cozinheiro extends Pessoa {
+
+    public Cozinheiro(String nome) {
+        super(nome);
+    }
+
+    @Override
+    public void executarFuncao() {
+// Daniel vai fazer 
+
+    }
 }
