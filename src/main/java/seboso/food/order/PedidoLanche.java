@@ -17,4 +17,12 @@ public class PedidoLanche {
     public void fazerLanche() {
         lanche.fazerLanche(adicionais);
     }
+
+    public double getPreco() {
+        return lanche.getPreco();
+    }
+
+    public String getNome() {
+        return lanche.getNome();
+    }
 }

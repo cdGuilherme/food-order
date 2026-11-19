@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class FoodOrder {
     public static void main(String[] args) {
         Cardapio cardapio = new Cardapio();
-        
+
+        cardapio.iniciarCardapio();
         cardapio.imprimirCardapio();
         Scanner s = new Scanner(System.in);
 

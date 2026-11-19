@@ -2,26 +2,26 @@ package seboso.food.order;
 
 public class Comanda implements ComandaInterface {
     private Cliente cliente;
-    private Produto produto;
+    private PedidoLanche lanche;
     private int quantidade;
     private Integer mesa;
     private boolean delivery;
 
-    public Comanda(Cliente cliente, Produto produto, int quantidade) {
-        this(cliente, produto, quantidade, null, false);
+    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade) {
+        this(cliente, lanche, quantidade, null, false);
     }
 
-    public Comanda(Cliente cliente, Produto produto, int quantidade, int mesa) {
-        this(cliente, produto, quantidade, mesa, false);
+    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, int mesa) {
+        this(cliente, lanche, quantidade, mesa, false);
     }
 
-    public Comanda(Cliente cliente, Produto produto, int quantidade, boolean delivery) {
-        this(cliente, produto, quantidade, null, delivery);
+    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, boolean delivery) {
+        this(cliente, lanche, quantidade, null, delivery);
     }
 
-    public Comanda(Cliente cliente, Produto produto, int quantidade, Integer mesa, boolean delivery) {
+    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, Integer mesa, boolean delivery) {
         setCliente(cliente);
-        setProduto(produto);
+        setLanche(lanche);
         setQuantidade(quantidade);
         setMesa(mesa);
         setDelivery(delivery);
@@ -38,15 +38,15 @@ public class Comanda implements ComandaInterface {
         this.cliente = cliente;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public PedidoLanche getlanche() {
+        return lanche;
     }
 
-    public void setProduto(Produto produto) {
-        if (produto == null) {
-            throw new IllegalArgumentException("O produto não pode ser nulo.");
+    public void setLanche(PedidoLanche lanche) {
+        if (lanche == null) {
+            throw new IllegalArgumentException("O lanche não pode ser nulo.");
         }
-        this.produto = produto;
+        this.lanche = lanche;
     }
 
     public int getQuantidade() {
@@ -84,7 +84,7 @@ public class Comanda implements ComandaInterface {
 
     @Override
     public double calcularTotal() {
-        return produto.getPreco() * quantidade;
+        return lanche.getPreco() * quantidade;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Comanda implements ComandaInterface {
     @Override
     public String getDescricao() {
         String local = delivery ? "Delivery" : (mesa == null ? "Mesa não informada" : "Mesa " + mesa);
-        return quantidade + "x " + produto.getNome() + " - " + local;
+        return quantidade + "x " + lanche.getNome() + " - " + local;
     }
 
     @Override

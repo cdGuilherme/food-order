@@ -9,19 +9,18 @@ package seboso.food.order;
  * @author Alunos
  */
 public class Bebida extends Produto{
-    private char tamanho;
+    private String preparo;
     
-    Bebida(String nome, double preco, char tamanho) {
+    Bebida(String nome, double preco, String preparo) {
         super(nome, preco);
-        setTamanho(tamanho);
+        setPreparo(preparo);
     }
 
-    public char getTamanho() {
-        return tamanho;
+    public String getPreparo() {
+        return preparo;
     }
 
-    public void setTamanho(char tamanho) {
-        this.tamanho = tamanho;
+    public void setPreparo(String preparo) {
+        this.preparo = preparo;
     }
-    
 }
