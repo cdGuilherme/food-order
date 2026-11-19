@@ -18,7 +18,7 @@ public class Cardapio {
     }
     
     public void adicionarAdicional(String nome, double preco, String preparo) {
-        Adicional novoAdicional = new Adicional(nome, preco);
+        Adicional novoAdicional = new Adicional(nome, preco, preparo);
         adicionais.add(novoAdicional);
     }
 

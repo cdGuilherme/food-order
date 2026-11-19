@@ -9,17 +9,12 @@ package seboso.food.order;
  * @author Alunos
  */
 public class Adicional extends Produto{
-    private int porcaoMedia;
-    Adicional(String nome, double preco) {
+    private String preparo;
+    Adicional(String nome, double preco, String preparo) {
         super(nome, preco);
+        this.preparo = preparo;
     }
-
-    public int getPorcaoMedia() {
-        return porcaoMedia;
+    public String getPreparo() {
+        return preparo;
     }
-
-    public void setPorcaoMedia(int porcaoMedia) {
-        this.porcaoMedia = porcaoMedia;
-    }
-    
 }
