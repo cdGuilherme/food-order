@@ -1,2 +1,11 @@
+seboso\food\order\Bebida.class
 seboso\food\order\FoodOrder.class
+seboso\food\order\Cozinheiro.class
+seboso\food\order\Pessoa.class
+seboso\food\order\Garcom.class
+seboso\food\order\Cardapio.class
+seboso\food\order\Cliente.class
+seboso\food\order\Lanche.class
+seboso\food\order\Adicional.class
+seboso\food\order\Produto.class
 seboso\food\order\Utils.class

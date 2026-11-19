@@ -14,7 +14,11 @@ import java.math.BigDecimal;
 public abstract class Produto {
     private String nome;
     private double preco;
-    private String preparo;
+    
+    Produto(String nome, double preco) {
+        setNome(nome);
+        setPreco(preco);
+    }
 
     protected String getNome() {
         return nome;
@@ -36,13 +40,5 @@ public abstract class Produto {
         }
 
         this.preco = preco;
-    }
-
-    protected String getPreparo() {
-        return preparo;
-    }
-
-    protected void setPreparo(String preparo) {
-        this.preparo = preparo;
     }
 }

@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class FoodOrder {
     public static void main(String[] args) {
+        Cardapio cardapio = new Cardapio();
+        
+        cardapio.imprimirCardapio();
         Scanner s = new Scanner(System.in);
 
         // Variáveis //
