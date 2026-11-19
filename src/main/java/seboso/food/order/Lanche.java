@@ -1,6 +1,8 @@
 
 package seboso.food.order;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alunos
@@ -20,17 +22,18 @@ public class Lanche extends Produto{
         setSalada(salada);
     }
     
-    public void fazerLanche() {
+    public void fazerLanche(ArrayList<Adicional> adicionais) {
         System.out.println("Modo de preparo: "+ getNome());
         System.out.println("Pegue o pão "+ getPao() + " parta ao meio e sele na chapa");
         System.out.println("Pese o hamburguer de "+ getHamburguer() +" e frite na chapa até dourar por fora");
         System.out.println("Quando estiver perto de acabar o hamburguer, pegue o queijo "+ getQueijo() +"e coloque por cima abafando com uma tampa para derreter");
         if (adicional != null) {
-            System.out.println("Faça o "+ getAdicional());
-            System.out.println("Monte o Lanche colocando o pão, hamburguer com o queijo, adicional, salada "+ getSalada() +" e feche o pão");
-        } else {
-            System.out.println("Monte o Lanche colocando o pão, hamburguer com o queijo, salada "+ getSalada() +" e feche o pão");
+            for (Adicional atual : adicionais) {
+                atual.getPreparo();
+            }
         }
+        System.out.println("Pega a salada "+  getSalada());
+        System.out.println("Finaliza montando tudo!");
     }
 
     public String getPao() {
