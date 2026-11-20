@@ -47,4 +47,10 @@ public class Utils {
         // "\033[H": posiciona o cursor no início do terminal
         // "\033[2J": limpa a tela
     }
+
+
+    public static void PrintOpcaoInvalida() {
+        System.out.println("Opção inválida!");
+        Utils.EsperarEnter();
+    }
 }
