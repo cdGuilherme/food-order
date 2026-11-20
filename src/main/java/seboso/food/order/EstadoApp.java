@@ -7,14 +7,22 @@ public class EstadoApp {
     Scanner s = new Scanner(System.in);
 
 
-    // Telas //
+    // Enums //
     // ////////
 
+    // Tela
     public enum Tela {
         TELA_INICIAL,
         NOVO_PEDIDO,
         LISTA_PEDIDOS,
         SAIR
+    }
+
+    // Método de limpeza de tela
+    public enum MetodoLimpeza {
+        QUEBRAR_LINHAS,
+        LIMPAR_TELA,
+        AMBOS
     }
 
 
@@ -27,4 +35,5 @@ public class EstadoApp {
     public boolean delivery = true; // Pedido é delivery ou cliente retira no balcão
     public int input = -1; // Input do usuário para navegar o programa pelo console
     public Tela telaAtual = Tela.TELA_INICIAL;
+    public MetodoLimpeza metodoLimpeza = MetodoLimpeza.AMBOS;
 }

@@ -3,8 +3,6 @@
 
 package seboso.food.order;
 
-import java.util.Scanner;
-
 public class FoodOrder {
     public static void main(String[] args) {
         EstadoApp estado = new EstadoApp();

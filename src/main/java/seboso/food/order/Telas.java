@@ -24,11 +24,12 @@ public class Telas {
 
     // Tela inicial
     public static void TelaInicial(EstadoApp estado) {
-        Utils.QuebrarLinhas(64);
+        Utils.LimparConsole(estado);
         Telas.DesenharLogo();
-        System.out.println("Seja bem-vindo ao restaurante Seboso's Food Order!");
 
-        System.out.println("\nPor favor, selecione uma opção:");
+        System.out.println("Seja bem-vindo ao restaurante Seboso's Food Order!\n");
+
+        System.out.println("Por favor, selecione uma opção:");
         System.out.println("1 - Iniciar um novo pedido");
         System.out.println("2 - Ver a lista de pedidos");
         System.out.println("0 - Sair");
@@ -48,6 +49,11 @@ public class Telas {
 
     // Tela de novo pedido
     public static void NovoPedido(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Novo Pedido >>\n");
+
         // Pede o nome do usuário
         do {
             System.out.print("Por favor informe o seu nome: ");
@@ -87,7 +93,11 @@ public class Telas {
 
     // Tela de lista de pedidos
     public static void ListaPedidos(EstadoApp estado) {
-        System.out.println("Opção selecionada: Lista de pedidos");
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Lista de Pedidos >>\n");
+
         Utils.EsperarEnter();
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
     }

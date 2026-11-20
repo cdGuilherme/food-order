@@ -49,6 +49,20 @@ public class Utils {
     }
 
 
+    // Método utilizado para limpeza de tela
+    public static void LimparConsole(EstadoApp estado) {
+        switch (estado.metodoLimpeza) {
+            case QUEBRAR_LINHAS -> QuebrarLinhas(100);
+            case LIMPAR_TELA -> LimparTela();
+            case AMBOS -> {
+                QuebrarLinhas(100);
+                LimparTela();
+            }
+        }
+    }
+
+
+    // Exibe na tela opção inválida
     public static void PrintOpcaoInvalida() {
         System.out.println("Opção inválida!");
         Utils.EsperarEnter();
