@@ -15,6 +15,7 @@ public class EstadoApp {
         TELA_INICIAL,
         NOVO_PEDIDO,
         LISTA_PEDIDOS,
+        TELA_CARDAPIO,
         SAIR
     }
 

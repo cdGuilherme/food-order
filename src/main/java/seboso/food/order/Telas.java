@@ -80,14 +80,7 @@ public class Telas {
         if (estado.input == 2)
             estado.delivery = false;
 
-        // Teste
-        if (estado.delivery)
-            System.out.println("Vai pedir delivery");
-        else
-            System.out.println("Vai retirar no balcão");
-
-        Utils.EsperarEnter();
-        estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+        estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
     }
 
 
@@ -97,6 +90,31 @@ public class Telas {
         Telas.DesenharLogo();
 
         System.out.println("<< Lista de Pedidos >>\n");
+
+        Utils.EsperarEnter();
+        estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+    }
+
+
+    // Tela do cardápio
+    public static void TelaCardapio(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Cardápio >>\n");
+
+        // Inicialização do cardápio
+        Cardapio cardapio = new Cardapio();
+
+        // Exibindo na tela
+        cardapio.iniciarCardapio();
+        cardapio.imprimirCardapio();
+
+        // Teste
+        if (estado.delivery)
+            System.out.println("Vai pedir delivery");
+        else
+            System.out.println("Vai retirar no balcão");
 
         Utils.EsperarEnter();
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;

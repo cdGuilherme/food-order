@@ -12,6 +12,7 @@ public class FoodOrder {
                 case TELA_INICIAL -> Telas.TelaInicial(estado);
                 case NOVO_PEDIDO -> Telas.NovoPedido(estado);
                 case LISTA_PEDIDOS -> Telas.ListaPedidos(estado);
+                case TELA_CARDAPIO -> Telas.TelaCardapio(estado);
             }
         }
     }
