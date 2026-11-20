@@ -226,9 +226,7 @@ public class Telas {
             // Exibindo o endereço digitado
             System.out.println("Seu endereço:");
             System.out.println("CEP: " + estado.cep);
-            System.out.println("Rua: " + estado.endereco + " " + estado.numero);
-            System.out.println("Bairro: " + estado.bairro);
-            System.out.println("Cidade: " + estado.cidade);
+            System.out.println("Endereço: Rua " + estado.endereco + ", nº" + estado.numero + " - " + estado.bairro + ", " + estado.cidade + "/" + estado.uf);
             System.out.println();
 
             do {
@@ -251,11 +249,9 @@ public class Telas {
                     return;
                 }
 
-                if (estado.input == 1)
-                    estado.enderecoConfirmado = true;
+                if (estado.input == 1) estado.enderecoConfirmado = true;
 
-                if (estado.input < 1 || estado.input > 2)
-                    Utils.PrintOpcaoInvalida();
+                if (estado.input < 1 || estado.input > 2) Utils.PrintOpcaoInvalida();
             } while (estado.input < 1 || estado.input > 2);
         }
 
@@ -274,8 +270,7 @@ public class Telas {
             System.out.print("Sua escolha: ");
             estado.input = Utils.ReceberInputInt();
 
-            if (estado.input < 0 || estado.input > 4)
-                Utils.PrintOpcaoInvalida();
+            if (estado.input < 0 || estado.input > 4) Utils.PrintOpcaoInvalida();
         } while (estado.input < 0 || estado.input > 4);
 
         switch (estado.input) {

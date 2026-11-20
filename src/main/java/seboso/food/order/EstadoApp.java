@@ -50,6 +50,7 @@ public class EstadoApp {
     public String numero;
     public String bairro;
     public String cidade;
+    public String uf = "SP";
     public boolean enderecoConfirmado = false;
 
     public boolean delivery; // Pedido é delivery ou cliente retira no balcão
