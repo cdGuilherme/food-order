@@ -10,12 +10,15 @@ public class EstadoApp {
     // Enums //
     // ////////
 
+
     // Tela
     public enum Tela {
         TELA_INICIAL,
         NOVO_PEDIDO,
         LISTA_PEDIDOS,
         TELA_CARDAPIO,
+        VER_PEDIDO,
+        TELA_PAGAMENTO,
         SAIR
     }
 
@@ -26,15 +29,55 @@ public class EstadoApp {
         AMBOS
     }
 
+    // Formas de pagamento
+    public enum FormasPagamento {
+        DINHEIRO,
+        PIX,
+        DEBITO,
+        CREDITO
+    }
+
 
     // Variáveis //
     // ////////////
 
+
     // TODO:
     // - Mudar os public's para private e acessar e armazenar os dados utilizando suas classes
     public String nome; // Nome do usuário
-    public boolean delivery = true; // Pedido é delivery ou cliente retira no balcão
-    public int input = -1; // Input do usuário para navegar o programa pelo console
+    public String cep;
+    public String endereco;
+    public String numero;
+    public String bairro;
+    public String cidade;
+    public boolean enderecoConfirmado = false;
+
+    public boolean delivery; // Pedido é delivery ou cliente retira no balcão
+    public int input; // Input do usuário para navegar o programa pelo console
+    public double total;
+
     public Tela telaAtual = Tela.TELA_INICIAL;
     public MetodoLimpeza metodoLimpeza = MetodoLimpeza.AMBOS;
+    public FormasPagamento formaPagamento;
+
+
+    // Métodos //
+    // //////////
+
+
+    // Limpa os dados do pedido do usuário
+    public void LimparDadosPedido() {
+        nome = null;
+        cep = null;
+        endereco = null;
+        numero = null;
+        bairro = null;
+        cidade = null;
+
+        enderecoConfirmado = false;
+        delivery = true;
+        formaPagamento = null;
+        total = 0.0;
+        input = -1;
+    }
 }

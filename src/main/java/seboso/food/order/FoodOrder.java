@@ -13,6 +13,8 @@ public class FoodOrder {
                 case NOVO_PEDIDO -> Telas.NovoPedido(estado);
                 case LISTA_PEDIDOS -> Telas.ListaPedidos(estado);
                 case TELA_CARDAPIO -> Telas.TelaCardapio(estado);
+                case VER_PEDIDO -> Telas.VerPedido(estado);
+                case TELA_PAGAMENTO -> Telas.TelaPagamento(estado);
             }
         }
     }

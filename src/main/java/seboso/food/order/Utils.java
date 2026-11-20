@@ -67,4 +67,21 @@ public class Utils {
         System.out.println("Opção inválida!");
         Utils.EsperarEnter();
     }
+
+
+    // Receber entrada de texto do usuário
+    public static String ReceberInputTexto(Scanner s, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            String input = s.nextLine();
+
+            if (input.equals("0"))
+                return null;
+
+            if (input.isBlank())
+                continue;
+
+            return input;
+        }
+    }
 }
