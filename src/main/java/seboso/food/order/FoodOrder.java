@@ -50,5 +50,10 @@ public class FoodOrder {
         System.out.println("1 - Lanches");
         System.out.println("2 - Bebidas");
         System.out.println("3 - Adicionais");
+
+        Utils.QuebrarLinhas(100);
+        Utils.LimparTela(); 
+
+        System.out.println("Teste");
     }
 }

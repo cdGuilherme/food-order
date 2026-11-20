@@ -28,4 +28,23 @@ public class Utils {
         }
         return input;
     }
+
+
+    // Função de quebrar linhas
+    public static void QuebrarLinhas(int qtdLinhas) {
+        // Pode "limpar" a tela inserindo um valor alto de "\n" para simular uma limpeza de tela
+        // Possui suporte para todos os terminais
+        System.out.print("\n".repeat(Math.max(0, qtdLinhas)));
+    }
+
+
+    // Função de limpar a tela
+    public static void LimparTela() {
+        // Se o terminal conseguir interpretar comandos ANSI, uma limpeza real da tela será feita
+        // Suporte limitado se testar no terminal de um IDE ou se usar o cmd do Windows
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        // "\033[H": posiciona o cursor no início do terminal
+        // "\033[2J": limpa a tela
+    }
 }
