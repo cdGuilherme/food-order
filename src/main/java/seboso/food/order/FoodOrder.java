@@ -24,7 +24,7 @@ public class FoodOrder {
         int input; // Input do usuário para navegar o programa pelo console
 
         // Início do programa, pede o nome do usuário
-        System.out.println("<< SEBOSO'S FOOD >>");
+        Telas.DesenharLogo();
         System.out.print("Para iniciar um pedido informe o seu nome: ");
         nome = s.nextLine();
         System.out.println("Seja bem-vindo de volta " + nome + "!\n");
@@ -52,7 +52,7 @@ public class FoodOrder {
         System.out.println("3 - Adicionais");
 
         Utils.QuebrarLinhas(100);
-        Utils.LimparTela(); 
+        Utils.LimparTela();
 
         System.out.println("Teste");
     }
