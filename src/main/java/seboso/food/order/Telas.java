@@ -1,57 +1,8 @@
+// Telas
+
 package seboso.food.order;
 
 public class Telas {
-    // Desenha a logo do restaurante
-    // https://www.asciiart.eu/text-to-ascii-art
-    public static void DesenharLogo() {
-        // @formatter:off
-        String str =
-            " ____            __                               __\n" +
-            "/\\  _`\\         /\\ \\                             /\\ \\\n" +
-            "\\ \\,\\L\\_\\     __\\ \\ \\____    ___     ____    ___ \\ \\/      ____\n" +
-            " \\/_\\__ \\   /'__`\\ \\ '__`\\  / __`\\  /',__\\  / __`\\\\/      /',__\\\n" +
-            "   /\\ \\L\\ \\/\\  __/\\ \\ \\L\\ \\/\\ \\L\\ \\/\\__, `\\/\\ \\L\\ \\      /\\__, `\\\n" +
-            "   \\ `\\____\\ \\____\\\\ \\_,__/\\ \\____/\\/\\____/\\ \\____/      \\/\\____/\n" +
-            "    \\/_____/\\/____/ \\/___/  \\/___/  \\/___/  \\/___/        \\/___/\n" +
-            " ____                    __       _____            __\n" +
-            "/\\  _`\\                 /\\ \\     /\\  __`\\         /\\ \\\n" +
-            "\\ \\ \\L\\_\\___     ___    \\_\\ \\    \\ \\ \\/\\ \\  _ __  \\_\\ \\     __   _ __\n" +
-            " \\ \\  _\\/ __`\\  / __`\\  /'_` \\    \\ \\ \\ \\ \\/\\`'__\\/'_` \\  /'__`\\/\\`'__\\\n" +
-            "  \\ \\ \\/\\ \\L\\ \\/\\ \\L\\ \\/\\ \\L\\ \\    \\ \\ \\_\\ \\ \\ \\//\\ \\L\\ \\/\\  __/\\ \\ \\/\n" +
-            "   \\ \\_\\ \\____/\\ \\____/\\ \\___,_\\    \\ \\_____\\ \\_\\\\ \\___,_\\ \\____\\\\ \\_\\\n" +
-            "    \\/_/\\/___/  \\/___/  \\/__,_ /     \\/_____/\\/_/ \\/__,_ /\\/____/ \\/_/\n\n";
-        System.out.print(str);
-        // @formatter:on
-    }
-
-
-    // Desenha o QR code do pix
-    // https://lillibridge.io/ascii-qr/
-    public static void DesenharQRcode() {
-        // @formatter:off
-        String str =
-            "█▀▀▀▀▀█ ▀▄▄███▄▀  █▄   ▀  █▀▀▀▀▀█\n" +
-            "█ ███ █ ▄▄▀▄█ ▀▀██▀▀ █▄▀  █ ███ █\n" +
-            "█ ▀▀▀ █ ██▄ ▄  ▄▀█ ▀▄██▄▄ █ ▀▀▀ █\n" +
-            "▀▀▀▀▀▀▀ █ ▀▄▀ █ ▀▄█▄█▄▀ █ ▀▀▀▀▀▀▀\n" +
-            "▀▄  ▀▄▀█▀ █▄▀  █▄█▄ ▀███ █▀▀▀█▄ █\n" +
-            "▀ █ █▀▀█▀ ▄ ▄█▀▀▄ ▀▄▄ ▄▀▄█▄  ▀ ▀ \n" +
-            "█ ██▄▄▀▄▀ █▄▀▀▄ ▀▄▄▄▄ ▀▀█▄▀█ ▀▄ ▀\n" +
-            "▄▄█▄█▀▀▄  ██▀▄██▄██ ▀█ █▀██▄▀  ▀ \n" +
-            "██ ▀██▀▄██▄ ▀  ▄▄▀█▀█▀█▄█ ▀ ▀█▄█ \n" +
-            "▀▄█▀█ ▀█  █ ██ █▀█▄ ██▀▀██▄█ ▀ █ \n" +
-            "█ ▀▄ █▀▀ ▀ ▀▄▀▀ ▄▄▀█▀ ▄   █▀▀█▄▄ \n" +
-            "   ▄██▀█▄ ▄▀▀▄▀ ▀▄██▄█▄▀▀█▄ ▄▄▀█▄\n" +
-            "▀▀▀ ▀ ▀▀▄ ██ █████  ▀██▄█▀▀▀█▀▄▀ \n" +
-            "█▀▀▀▀▀█ ▀▀▀▄  ██▄ ▀▄  ▄ █ ▀ █▀  ▄\n" +
-            "█ ███ █ ▀▄▄▀██▀ ▀ ▄█▄ ▀▄▀▀████▄▄▀\n" +
-            "█ ▀▀▀ █  ▀ ▄█▄▀█▄▄█ ▀█ ▄▄▀█▀▀▀   \n" +
-            "▀▀▀▀▀▀▀ ▀ ▀      ▀ ▀▀▀▀▀▀▀▀  ▀  ▀\n\n";
-        System.out.print(str);
-        // @formatter:on
-    }
-
-
     // Tela inicial
     public static void TelaInicial(EstadoApp estado) {
         estado.LimparDadosPedido(); // Limpa os dados do pedido anterior
@@ -73,8 +24,6 @@ public class Telas {
             case 0 -> estado.telaAtual = EstadoApp.Tela.SAIR;
             default -> Utils.PrintOpcaoInvalida();
         }
-
-        System.out.println();
     }
 
 
@@ -114,18 +63,6 @@ public class Telas {
     }
 
 
-    // Tela de lista de pedidos
-    public static void ListaPedidos(EstadoApp estado) {
-        Utils.LimparConsole(estado);
-        Telas.DesenharLogo();
-
-        System.out.println("<< Lista de Pedidos >>\n");
-
-        Utils.EsperarEnter();
-        estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
-    }
-
-
     // Tela do cardápio
     public static void TelaCardapio(EstadoApp estado) {
         Utils.LimparConsole(estado);
@@ -140,10 +77,21 @@ public class Telas {
         cardapio.iniciarCardapio();
         cardapio.imprimirCardapio();
 
-        System.out.printf("Total: R$ %.2f", estado.total);
+        // OBS CARDÁPIO:
+        // - Identificar cada produto com um número que pode ser selecionado no console, a partir de 10
+        // - No lugar de exibir os adicionais, deve ser exibido as sobremesas
+        // - Quando selecionar um produto, o usuário deve ter a opção de escolher:
+        //   - Adicionais se for lanche
+        //   - Tamanho se for uma bebida
+        //   - Opções sem açúcar se for uma sobremesa
+
+        System.out.printf("Total: R$ %.2f\n", estado.total);
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Ver pedido");
+        System.out.println("11 a 15 - Escolher um lanche");
+        System.out.println("21 a 25 - Escolher uma bebida ");
+        System.out.println("31 a 35 - Escolher uma sobremesa");
         System.out.println("0 - Cancelar pedido");
         System.out.print("Sua escolha: ");
         estado.input = Utils.ReceberInputInt();
@@ -156,16 +104,17 @@ public class Telas {
     }
 
 
-    // Tela de ver pedido
+    // Tela de ver o pedido
     public static void VerPedido(EstadoApp estado) {
         Utils.LimparConsole(estado);
         Telas.DesenharLogo();
 
         System.out.println("<< Meu Pedido >>");
 
-        // ...
+        // OBS VER PEDIDO:
+        // - Aqui deve ser exibido todos os produtos que o usuário selecionou na tela do cardápio
 
-        System.out.printf("\nTotal: R$ %.2f", estado.total);
+        System.out.printf("\nTotal: R$ %.2f\n", estado.total);
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Finalizar pedido");
@@ -181,7 +130,7 @@ public class Telas {
     }
 
 
-    // Tela de finalizar o pedido
+    // Tela de pagamento
     public static void TelaPagamento(EstadoApp estado) {
         Utils.LimparConsole(estado);
         Telas.DesenharLogo();
@@ -311,8 +260,105 @@ public class Telas {
             }
         }
 
-        // O pedido deve ser adicionado a lista de pedidos aqui...
+        // OBS FINALIZAÇÃO DO PAGAMENTO:
+        // - O pedido atual deve ser adicionado a lista de pedidos com suas informações
+        // - Armazenar também o tempo em que o pedido foi finalizado para calcular o tempo até a finalização do pedido
 
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+    }
+
+
+    // Tela de lista de pedidos
+    public static void ListaPedidos(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Lista de Pedidos >>\n");
+
+        // OBS LISTA PEDIDOS:
+        // - Aqui deve ser exibido todos os pedidos da fila de pedidos
+        // - Deverá também ter a opção do usuário selecionar o pedido pela numeração da comanda para ver detalhes
+
+        System.out.println("100 - Pedido Exemplo John Doe");
+
+        System.out.print("\nSelecione um pedido pela comanda ou digite 0 para sair: ");
+        estado.input = Utils.ReceberInputInt();
+
+        switch (estado.input) {
+            case 100 -> estado.telaAtual = EstadoApp.Tela.DETALHES_PEDIDO;
+            case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+            default -> Utils.PrintOpcaoInvalida();
+        }
+    }
+
+
+    // Tela de detalhes do pedido
+    public static void DetalhesPedido(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Detalhes do Pedido >>\n");
+
+        // OBS DETALHES DO PEDIDO:
+        // - Aqui deve ter as informações do pedido
+        // - Exibir a etapa atual se for cozinha, ou tempo estimado até entrega se saiu da cozinha e for delivery
+
+        System.out.println("Pedido #100 Exemplo John Doe");
+
+        System.out.println("\n...\n");
+
+        Utils.EsperarEnter();
+        estado.telaAtual = EstadoApp.Tela.LISTA_PEDIDOS;
+    }
+
+
+    // Desenha a logo do restaurante
+    // https://www.asciiart.eu/text-to-ascii-art
+    public static void DesenharLogo() {
+        // @formatter:off
+        String str =
+            " ____            __                               __\n" +
+            "/\\  _`\\         /\\ \\                             /\\ \\\n" +
+            "\\ \\,\\L\\_\\     __\\ \\ \\____    ___     ____    ___ \\ \\/      ____\n" +
+            " \\/_\\__ \\   /'__`\\ \\ '__`\\  / __`\\  /',__\\  / __`\\\\/      /',__\\\n" +
+            "   /\\ \\L\\ \\/\\  __/\\ \\ \\L\\ \\/\\ \\L\\ \\/\\__, `\\/\\ \\L\\ \\      /\\__, `\\\n" +
+            "   \\ `\\____\\ \\____\\\\ \\_,__/\\ \\____/\\/\\____/\\ \\____/      \\/\\____/\n" +
+            "    \\/_____/\\/____/ \\/___/  \\/___/  \\/___/  \\/___/        \\/___/\n" +
+            " ____                    __       _____            __\n" +
+            "/\\  _`\\                 /\\ \\     /\\  __`\\         /\\ \\\n" +
+            "\\ \\ \\L\\_\\___     ___    \\_\\ \\    \\ \\ \\/\\ \\  _ __  \\_\\ \\     __   _ __\n" +
+            " \\ \\  _\\/ __`\\  / __`\\  /'_` \\    \\ \\ \\ \\ \\/\\`'__\\/'_` \\  /'__`\\/\\`'__\\\n" +
+            "  \\ \\ \\/\\ \\L\\ \\/\\ \\L\\ \\/\\ \\L\\ \\    \\ \\ \\_\\ \\ \\ \\//\\ \\L\\ \\/\\  __/\\ \\ \\/\n" +
+            "   \\ \\_\\ \\____/\\ \\____/\\ \\___,_\\    \\ \\_____\\ \\_\\\\ \\___,_\\ \\____\\\\ \\_\\\n" +
+            "    \\/_/\\/___/  \\/___/  \\/__,_ /     \\/_____/\\/_/ \\/__,_ /\\/____/ \\/_/\n\n";
+        System.out.print(str);
+        // @formatter:on
+    }
+
+
+    // Desenha o QR code do pix
+    // https://lillibridge.io/ascii-qr/
+    public static void DesenharQRcode() {
+        // @formatter:off
+        String str =
+            "█▀▀▀▀▀█ ▀▄▄███▄▀  █▄   ▀  █▀▀▀▀▀█\n" +
+            "█ ███ █ ▄▄▀▄█ ▀▀██▀▀ █▄▀  █ ███ █\n" +
+            "█ ▀▀▀ █ ██▄ ▄  ▄▀█ ▀▄██▄▄ █ ▀▀▀ █\n" +
+            "▀▀▀▀▀▀▀ █ ▀▄▀ █ ▀▄█▄█▄▀ █ ▀▀▀▀▀▀▀\n" +
+            "▀▄  ▀▄▀█▀ █▄▀  █▄█▄ ▀███ █▀▀▀█▄ █\n" +
+            "▀ █ █▀▀█▀ ▄ ▄█▀▀▄ ▀▄▄ ▄▀▄█▄  ▀ ▀ \n" +
+            "█ ██▄▄▀▄▀ █▄▀▀▄ ▀▄▄▄▄ ▀▀█▄▀█ ▀▄ ▀\n" +
+            "▄▄█▄█▀▀▄  ██▀▄██▄██ ▀█ █▀██▄▀  ▀ \n" +
+            "██ ▀██▀▄██▄ ▀  ▄▄▀█▀█▀█▄█ ▀ ▀█▄█ \n" +
+            "▀▄█▀█ ▀█  █ ██ █▀█▄ ██▀▀██▄█ ▀ █ \n" +
+            "█ ▀▄ █▀▀ ▀ ▀▄▀▀ ▄▄▀█▀ ▄   █▀▀█▄▄ \n" +
+            "   ▄██▀█▄ ▄▀▀▄▀ ▀▄██▄█▄▀▀█▄ ▄▄▀█▄\n" +
+            "▀▀▀ ▀ ▀▀▄ ██ █████  ▀██▄█▀▀▀█▀▄▀ \n" +
+            "█▀▀▀▀▀█ ▀▀▀▄  ██▄ ▀▄  ▄ █ ▀ █▀  ▄\n" +
+            "█ ███ █ ▀▄▄▀██▀ ▀ ▄█▄ ▀▄▀▀████▄▄▀\n" +
+            "█ ▀▀▀ █  ▀ ▄█▄▀█▄▄█ ▀█ ▄▄▀█▀▀▀   \n" +
+            "▀▀▀▀▀▀▀ ▀ ▀      ▀ ▀▀▀▀▀▀▀▀  ▀  ▀\n\n";
+        System.out.print(str);
+        // @formatter:on
     }
 }

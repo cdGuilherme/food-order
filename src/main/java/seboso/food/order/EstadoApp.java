@@ -1,3 +1,5 @@
+// Variáveis globais e state machine
+
 package seboso.food.order;
 
 import java.util.Scanner;
@@ -11,39 +13,28 @@ public class EstadoApp {
     // ////////
 
 
-    // Tela
+    // Telas disponíveis para serem selecionadas pelo state machine
     public enum Tela {
-        TELA_INICIAL,
-        NOVO_PEDIDO,
-        LISTA_PEDIDOS,
-        TELA_CARDAPIO,
-        VER_PEDIDO,
-        TELA_PAGAMENTO,
-        SAIR
+        TELA_INICIAL, NOVO_PEDIDO, TELA_CARDAPIO, VER_PEDIDO, TELA_PAGAMENTO, LISTA_PEDIDOS, DETALHES_PEDIDO, SAIR
     }
 
-    // Método de limpeza de tela
+    // Métodos disponíveis para limpeza de tela
     public enum MetodoLimpeza {
-        QUEBRAR_LINHAS,
-        LIMPAR_TELA,
-        AMBOS
+        QUEBRAR_LINHAS, LIMPAR_TELA, AMBOS
     }
 
-    // Formas de pagamento
+    // Formas de pagamento disponíveis
     public enum FormasPagamento {
-        DINHEIRO,
-        PIX,
-        DEBITO,
-        CREDITO
+        DINHEIRO, PIX, DEBITO, CREDITO
     }
 
 
     // Variáveis //
     // ////////////
 
+    // OBS VARIÁVEIS GLOBAIS
+    // - Mudar a implementação atual dessas variáveis para utilizarem os getters e setters de suas classes respectivas
 
-    // TODO:
-    // - Mudar os public's para private e acessar e armazenar os dados utilizando suas classes
     public String nome; // Nome do usuário
     public String cep;
     public String endereco;
@@ -55,16 +46,18 @@ public class EstadoApp {
 
     public boolean delivery; // Pedido é delivery ou cliente retira no balcão
     public int input; // Input do usuário para navegar o programa pelo console
-    public double total;
+    public double total; // Valor total do pedido atual
 
-    public Tela telaAtual = Tela.TELA_INICIAL;
-    public MetodoLimpeza metodoLimpeza = MetodoLimpeza.AMBOS;
-    public FormasPagamento formaPagamento;
+    public MetodoLimpeza metodoLimpeza = MetodoLimpeza.AMBOS; // Como é feito a limpeza da tela
+    public Tela telaAtual = Tela.TELA_INICIAL; // Funcionamento do state machine
+    public FormasPagamento formaPagamento; // Forma de pagamento atualmente selecionada
 
 
     // Métodos //
     // //////////
 
+    // OBS MÉTODOS:
+    // - Mudar essa implementação atual de limpar os dados do usuário para seus respectivos getters e setters
 
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
