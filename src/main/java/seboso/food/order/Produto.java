@@ -10,6 +10,7 @@ package seboso.food.order;
  */
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public abstract class Produto {
     private String nome;
@@ -41,4 +42,7 @@ public abstract class Produto {
 
         this.preco = preco;
     }
+
+    abstract public void modoPreparo(ArrayList<Adicional> adicionais);
+    abstract public void modoPreparo();
 }

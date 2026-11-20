@@ -4,6 +4,8 @@
  */
 package seboso.food.order;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alunos
@@ -14,6 +16,14 @@ public class Bebida extends Produto{
     Bebida(String nome, double preco, String preparo) {
         super(nome, preco);
         setPreparo(preparo);
+    }
+
+    @Override
+    public void modoPreparo(ArrayList<Adicional> adicionais) {}
+
+    @Override
+    public void modoPreparo() {
+        System.out.println(preparo);
     }
 
     public String getPreparo() {

@@ -6,16 +6,17 @@ public class PedidoLanche {
     private Lanche lanche;
     private ArrayList<Adicional> adicionais = new ArrayList<>();
 
-    public PedidoLanche(Lanche lanche) {
-        this.lanche = lanche;
+    PedidoLanche(Lanche lanche) {
+        this(lanche,null);
     }
 
-    public void addAdicionais(Adicional adicional) {
-        adicionais.add(adicional);
+    PedidoLanche(Lanche lanche, ArrayList<Adicional> adicionais) {
+        this.lanche = lanche;
+        this.adicionais.addAll(adicionais);
     }
 
     public void fazerLanche() {
-        lanche.fazerLanche(adicionais);
+        lanche.modoPreparo(adicionais);
     }
 
     public double getPreco() {

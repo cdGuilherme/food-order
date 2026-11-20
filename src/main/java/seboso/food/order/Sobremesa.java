@@ -1,5 +1,7 @@
 package seboso.food.order;
 
+import java.util.ArrayList;
+
 public class Sobremesa extends Produto {
     private String preparo;
     public Sobremesa(String nome, double preco, String preparo) {
@@ -7,8 +9,12 @@ public class Sobremesa extends Produto {
         setPreparo(preparo);
     }
 
-    public String getPreparo() {
-        return preparo;
+    @Override
+    public void modoPreparo(ArrayList<Adicional> adicionais) {}
+
+    @Override
+    public void modoPreparo() {
+        System.out.println(preparo);
     }
 
     public void setPreparo(String preparo) {

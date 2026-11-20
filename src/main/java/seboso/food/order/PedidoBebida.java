@@ -24,4 +24,8 @@ public class PedidoBebida {
     public void setTamanho(char tamanho) {
         this.tamanho = tamanho;
     }
+
+    public double getPreco() {
+        return bebida.getPreco();
+    }
 }

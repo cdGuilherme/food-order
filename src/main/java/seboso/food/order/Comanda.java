@@ -3,61 +3,34 @@ package seboso.food.order;
 public class Comanda implements ComandaInterface {
     private Cliente cliente;
     private PedidoLanche lanche;
-    private int quantidade;
+    private int qtdLanches;
+    private PedidoBebida bebida;
+    private int qtdBebidas;
+    private PedidoSobremesa sobremesa;
+    private int qtdSobremesas;
     private Integer mesa;
     private boolean delivery;
 
-    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade) {
-        this(cliente, lanche, quantidade, null, false);
-    }
-
-    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, int mesa) {
-        this(cliente, lanche, quantidade, mesa, false);
-    }
-
-    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, boolean delivery) {
-        this(cliente, lanche, quantidade, null, delivery);
-    }
-
-    public Comanda(Cliente cliente, PedidoLanche lanche, int quantidade, Integer mesa, boolean delivery) {
-        setCliente(cliente);
-        setLanche(lanche);
-        setQuantidade(quantidade);
-        setMesa(mesa);
-        setDelivery(delivery);
+    Comanda(Cliente cliente, PedidoLanche lanche, int qtdLanches, PedidoBebida bebida, int qtdBebidas, PedidoSobremesa sobremesa, int qtdSobremesas) {
+        this.cliente = cliente;
+        this.lanche = lanche;
+        this.qtdLanches = qtdLanches;
+        this.bebida = bebida;
+        this.qtdBebidas = qtdBebidas;
+        this.sobremesa = sobremesa;
+        this.qtdSobremesas = qtdSobremesas;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        if (cliente == null) {
-            throw new IllegalArgumentException("O cliente não pode ser nulo.");
-        }
-        this.cliente = cliente;
-    }
-
     public PedidoLanche getlanche() {
         return lanche;
     }
 
-    public void setLanche(PedidoLanche lanche) {
-        if (lanche == null) {
-            throw new IllegalArgumentException("O lanche não pode ser nulo.");
-        }
-        this.lanche = lanche;
-    }
-
     public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        if (quantidade <= 0) {
-            throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
-        }
-        this.quantidade = quantidade;
+        return qtdLanches;
     }
 
     public Integer getMesa() {
@@ -82,20 +55,30 @@ public class Comanda implements ComandaInterface {
         }
     }
 
-    @Override
-    public double calcularTotal() {
-        return lanche.getPreco() * quantidade;
+    private void setQuantidade(int qtdLanches) {
+        if (qtdLanches <= 0) {
+            throw new IllegalArgumentException("O número deve ser maior que 0");
+        }
+        this.qtdLanches = qtdLanches;
     }
 
     @Override
-    public void alterarQuantidade(int quantidade) {
-        setQuantidade(quantidade);
+    public double calcularTotal() {
+        double valorLanche = lanche == null ? 0.0 : lanche.getPreco() * qtdLanches;
+        double valorBebidas = bebida == null ? 0.0 : bebida.getPreco() * qtdBebidas;
+        double valorSobremesa = sobremesa == null ? 0.0 : sobremesa.getPreco() * qtdSobremesas;
+        return valorLanche + valorBebidas + valorSobremesa;
+    }
+
+    @Override
+    public void alterarQuantidade(int qtdLanches) {
+        setQuantidade(qtdLanches);
     }
 
     @Override
     public String getDescricao() {
         String local = delivery ? "Delivery" : (mesa == null ? "Mesa não informada" : "Mesa " + mesa);
-        return quantidade + "x " + lanche.getNome() + " - " + local;
+        return qtdLanches + "x " + lanche.getNome() + " - " + local;
     }
 
     @Override
