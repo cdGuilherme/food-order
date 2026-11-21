@@ -37,17 +37,17 @@ public class Cardapio {
     public void imprimirCardapio() {
         System.out.println("Lanches:");
         for (Lanche atual : lanches) {
-            System.out.println(atual.getNome() + " R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() + " R$" + atual.getPreco());
         }
         System.out.println("");
         System.out.println("Bebidas:");
         for (Bebida atual : bebidas) {
-            System.out.println(atual.getNome() +" R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() +" R$" + atual.getPreco());
         }
         System.out.println("");
         System.out.println("Sobremesas:");
         for (Sobremesa atual : sobremesas) {
-            System.out.println(atual.getNome() + " R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() + " R$" + atual.getPreco());
         }
     }
 
@@ -114,5 +114,41 @@ public class Cardapio {
                 }
             }
         }
+    }
+
+
+    // Retorna true se a opção é válida ou false se não
+    public boolean opcaoValida(int opcao) {
+        switch ((opcao - 1) / 10) {
+            case 1 -> {
+                for (Lanche atual : lanches) {
+                    if (opcao == atual.getOpcao()) {
+                        return true;
+                    }
+                }
+            }
+            case 2 -> {
+                for (Bebida atual : bebidas) {
+                    if (opcao == atual.getOpcao()) {
+                        return true;
+                    }
+                }
+            }
+            case 3 -> {
+                for (Sobremesa atual : sobremesas) {
+                    if (opcao == atual.getOpcao()) {
+                        return true;
+                    }
+                }
+            }
+            case 4 -> {
+                for (Adicional atual : adicionais) {
+                    if (opcao == atual.getOpcao()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

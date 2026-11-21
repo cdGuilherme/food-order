@@ -85,7 +85,7 @@ public class Telas {
         //   - Tamanho se for uma bebida
         //   - Opções sem açúcar se for uma sobremesa
 
-        System.out.printf("Total: R$ %.2f\n", estado.total);
+        System.out.printf("\nTotal: R$ %.2f\n", estado.total);
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Ver pedido");
@@ -96,6 +96,17 @@ public class Telas {
         System.out.print("Sua escolha: ");
         estado.input = Utils.ReceberInputInt();
 
+        // Usuário seleciona uma das opções válidas no cardápio
+        if (cardapio.opcaoValida(estado.input)) {
+            if (estado.input < 40) {
+                System.out.println("Opção selecionada: ");
+                cardapio.imprimirOpcao(estado.input);
+                Utils.EsperarEnter();
+                return;
+            }
+        }
+
+        // Usuário seleciona uma opção de navegação
         switch (estado.input) {
             case 1 -> estado.telaAtual = EstadoApp.Tela.VER_PEDIDO;
             case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
