@@ -99,7 +99,7 @@ public class Telas {
         // Usuário seleciona uma das opções válidas no cardápio
         if (cardapio.opcaoValida(estado.input)) {
             if (estado.input < 40) {
-                System.out.println("\nOpção selecionada: ");
+                System.out.print("\nOpção selecionada: ");
                 cardapio.imprimirOpcao(estado.input);
 
                 switch ((estado.input - 1) / 10) {
