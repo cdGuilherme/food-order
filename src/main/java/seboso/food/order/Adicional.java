@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Adicional extends Produto{
     private String preparo;
-    Adicional(String nome, double preco, String preparo) {
-        super(nome, preco);
+    Adicional(int opcao, String nome, double preco, String preparo) {
+        super(opcao, nome, preco);
         this.preparo = preparo;
     }
 

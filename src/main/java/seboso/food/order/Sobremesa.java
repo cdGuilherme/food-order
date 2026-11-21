@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Sobremesa extends Produto {
     private String preparo;
-    public Sobremesa(String nome, double preco, String preparo) {
-        super(nome, preco);
+    public Sobremesa(int opcao, String nome, double preco, String preparo) {
+        super(opcao, nome, preco);
         setPreparo(preparo);
     }
 

@@ -7,14 +7,14 @@ import java.util.ArrayList;
  *
  * @author Alunos
  */
-public class Lanche extends Produto{
+public class Lanche extends Produto {
     private String pao;
     private String hamburguer;
     private String queijo;
     private String salada;
     
-    Lanche(String nome, double preco, String pao, String hamburguer, String queijo, String salada) {
-        super(nome,preco);
+    Lanche(int opcao, String nome, double preco, String pao, String hamburguer, String queijo, String salada) {
+        super(opcao, nome,preco);
         setPao(pao);
         setHamburguer(hamburguer);
         setQueijo(queijo);

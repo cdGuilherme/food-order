@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Bebida extends Produto{
     private String preparo;
     
-    Bebida(String nome, double preco, String preparo) {
-        super(nome, preco);
+    Bebida(int opcao, String nome, double preco, String preparo) {
+        super(opcao, nome, preco);
         setPreparo(preparo);
     }
 

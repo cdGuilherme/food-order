@@ -13,10 +13,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public abstract class Produto {
+    private int opcao;
     private String nome;
     private double preco;
     
-    Produto(String nome, double preco) {
+    Produto(int opcao, String nome, double preco) {
+        setOpcao(opcao);
         setNome(nome);
         setPreco(preco);
     }
@@ -41,6 +43,14 @@ public abstract class Produto {
         }
 
         this.preco = preco;
+    }
+
+    public int getOpcao() {
+        return opcao;
+    }
+
+    public void setOpcao(int opcao) {
+        this.opcao = opcao;
     }
 
     abstract public void modoPreparo(ArrayList<Adicional> adicionais);
