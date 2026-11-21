@@ -138,8 +138,10 @@ public class Telas {
                             System.out.print("Sua escolha: ");
                             estado.input = Utils.ReceberInputInt();
                             // Usuário seleciona um tamanho
-                            if (estado.input < 1 || estado.input > 3) {
+                            if (estado.input >= 1 && estado.input <= 3) {
                                 pedidoBebida.setTamanho(estado.input);
+                            } else {
+                                Utils.PrintOpcaoInvalida();
                             }
                         } while (estado.input < 1 || estado.input > 3);
 
