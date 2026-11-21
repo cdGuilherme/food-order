@@ -26,4 +26,12 @@ public class PedidoLanche {
     public String getNome() {
         return lanche.getNome();
     }
+
+    public Lanche getLanche() {
+        return lanche;
+    }
+
+    public ArrayList<Adicional> getAdicionais() {
+        return adicionais;
+    }
 }

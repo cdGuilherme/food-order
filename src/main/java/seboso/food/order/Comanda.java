@@ -1,44 +1,44 @@
 package seboso.food.order;
 
-public class Comanda implements ComandaInterface {
-    private Cliente cliente;
-    private PedidoLanche lanche;
-    private int qtdLanches;
-    private PedidoBebida bebida;
-    private int qtdBebidas;
-    private PedidoSobremesa sobremesa;
-    private int qtdSobremesas;
-    private Integer mesa;
-    private boolean delivery;
+import java.util.ArrayList;
+import java.util.Random;
 
-    Comanda(Cliente cliente, PedidoLanche lanche, int qtdLanches, PedidoBebida bebida, int qtdBebidas, PedidoSobremesa sobremesa, int qtdSobremesas) {
-        this.cliente = cliente;
-        this.lanche = lanche;
-        this.qtdLanches = qtdLanches;
-        this.bebida = bebida;
-        this.qtdBebidas = qtdBebidas;
-        this.sobremesa = sobremesa;
-        this.qtdSobremesas = qtdSobremesas;
+public class Comanda implements ComandaInterface {
+    private int numComanda;
+    private Cliente cliente;
+    private ArrayList<PedidoLanche> lanche = new ArrayList<>();
+    private ArrayList<PedidoBebida> bebida = new ArrayList<>();
+    private ArrayList<PedidoSobremesa> sobremesa = new ArrayList<>();
+    private int mesa;
+    private boolean delivery;
+    private double valorFrete;
+
+    // Número aleatório de km do pedido //
+    // ///////////////////////////////////
+
+    Random random = new Random();
+
+    int km = random.nextInt(50) + 1;
+    double valorKm = 2.5;
+
+    Comanda(int numComanda) {
+        this.numComanda = numComanda;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public PedidoLanche getlanche() {
-        return lanche;
+    public int getComanda() {
+        return numComanda;
     }
 
-    public int getQuantidade() {
-        return qtdLanches;
-    }
-
-    public Integer getMesa() {
+    public int getMesa() {
         return mesa;
     }
 
-    public void setMesa(Integer mesa) {
-        if (mesa != null && mesa <= 0) {
+    public void setMesa(int mesa) {
+        if (mesa <= 0) {
             throw new IllegalArgumentException("O número da mesa deve ser positivo.");
         }
         this.mesa = mesa;
@@ -50,39 +50,107 @@ public class Comanda implements ComandaInterface {
 
     public void setDelivery(boolean delivery) {
         this.delivery = delivery;
-        if (delivery) {
-            mesa = null;
-        }
     }
 
-    private void setQuantidade(int qtdLanches) {
-        if (qtdLanches <= 0) {
-            throw new IllegalArgumentException("O número deve ser maior que 0");
-        }
-        this.qtdLanches = qtdLanches;
+    public void setLanche(PedidoLanche lanche) {
+        this.lanche.add(lanche);
+    }
+
+    public void setBebida(PedidoBebida bebida) {
+        this.bebida.add(bebida);
+    }
+
+    public void setSobremesa(PedidoSobremesa sobremesa) {
+        this.sobremesa.add(sobremesa);
+    }
+
+    public int getKm() {
+        return km;
+    }
+
+    public double getValorKm() {
+        return valorKm;
     }
 
     @Override
     public double calcularTotal() {
-        double valorLanche = lanche == null ? 0.0 : lanche.getPreco() * qtdLanches;
-        double valorBebidas = bebida == null ? 0.0 : bebida.getPreco() * qtdBebidas;
-        double valorSobremesa = sobremesa == null ? 0.0 : sobremesa.getPreco() * qtdSobremesas;
-        return valorLanche + valorBebidas + valorSobremesa;
+        double valorLanches = 0;
+        double valorBebidas = 0;
+        double valorSobremesa = 0;
+
+        for (PedidoLanche atual : lanche) {
+            valorLanches += atual.getPreco();
+        }
+        for (PedidoBebida atual : bebida) {
+            valorBebidas += atual.getPreco();
+        }
+        for (PedidoSobremesa atual : sobremesa) {
+            valorSobremesa += atual.getPreco();
+        }
+        if (delivery) {
+            this.valorFrete = valorKm * km;
+            return valorBebidas + valorSobremesa + valorLanches + this.valorFrete;
+        }
+        return valorLanches + valorBebidas + valorSobremesa;
     }
 
     @Override
-    public void alterarQuantidade(int qtdLanches) {
-        setQuantidade(qtdLanches);
-    }
+    public void getDescricao(boolean detalhada) {
+        if (detalhada) {
 
-    @Override
-    public String getDescricao() {
-        String local = delivery ? "Delivery" : (mesa == null ? "Mesa não informada" : "Mesa " + mesa);
-        return qtdLanches + "x " + lanche.getNome() + " - " + local;
-    }
+            // Print da comanda e Cliente
+            System.out.println("Pedido: " + getComanda() + " " + getCliente().getNome() + "\n");
 
-    @Override
-    public String toString() {
-        return getDescricao() + " | Total: R$ " + String.format("%.2f", calcularTotal());
+            // Print dos lanches
+            for (PedidoLanche atual : lanche) {
+                System.out.println(atual.getNome() + "\n");
+                atual.getLanche().modoPreparo(atual.getAdicionais());
+            }
+
+            // print das bebidas
+            for (PedidoBebida atual : bebida) {
+                System.out.println(atual.getBebida().getNome() + "\n");
+                atual.getBebida().modoPreparo();
+            }
+
+            // Print das sobremesas
+            for (PedidoSobremesa atual : sobremesa) {
+                System.out.println(atual.getSobremesa().getNome() + "\n");
+                atual.getSobremesa().modoPreparo();
+            }
+            // Se for delivery
+            if (delivery) {
+                System.out.println("Frete:\n");
+                System.out.println(getKm() + "km");
+                System.out.println("Valor Frete: R$" + getValorKm() + "\n");
+            }
+            // Valor total da compra
+            System.out.println("Valor Total: R$" + calcularTotal());
+        } else {
+            //  delivery == true) valor frete e total
+            // Print da comanda e Cliente
+            System.out.println("Pedido: " + getComanda() + " " + getCliente().getNome() + "\n");
+
+            // Print do pedido resumido
+            // Lanches
+            for (PedidoLanche atual : lanche) {
+                System.out.println(atual.getNome());
+            }
+            // Bebidas
+            for (PedidoBebida atual : bebida) {
+                System.out.println(atual.getBebida().getNome());
+            }
+            // Sobremesas
+            for (PedidoSobremesa atual : sobremesa) {
+                System.out.println(atual.getSobremesa().getNome());
+            }
+            // Se for delivery
+            if (delivery) {
+                System.out.println("Frete:\n");
+                System.out.println("Valor Frete: R$" + getValorKm() + "\n");
+            }
+            // Valor total da compra
+            System.out.println("Valor Total: R$" + calcularTotal());
+        }
     }
 }
