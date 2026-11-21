@@ -1,12 +1,7 @@
-
 package seboso.food.order;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Alunos
- */
 public class Lanche extends Produto {
     private String pao;
     private String hamburguer;

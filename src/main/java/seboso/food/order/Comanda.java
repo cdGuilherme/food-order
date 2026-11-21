@@ -3,15 +3,28 @@ package seboso.food.order;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Comanda implements ComandaInterface {
     private int numComanda;
     private Cliente cliente;
+    
     private ArrayList<PedidoLanche> lanche = new ArrayList<>();
     private ArrayList<PedidoBebida> bebida = new ArrayList<>();
     private ArrayList<PedidoSobremesa> sobremesa = new ArrayList<>();
+    
     private int mesa;
     private boolean delivery;
     private double valorFrete;
+    
+    /////////////////////////////////////////////////////////////////////
+    ///////////////////////  STATUS TERMINADOS//////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    
+    private boolean grelhaFinalizada = true;
+    private boolean barFinalizado = true;
+    private boolean confeitariaFinalizada = true;
 
     // Número aleatório de km do pedido //
     // ///////////////////////////////////
@@ -54,14 +67,17 @@ public class Comanda implements ComandaInterface {
 
     public void setLanche(PedidoLanche lanche) {
         this.lanche.add(lanche);
+        this.grelhaFinalizada = false;
     }
 
     public void setBebida(PedidoBebida bebida) {
         this.bebida.add(bebida);
+        this.barFinalizado = false;
     }
 
     public void setSobremesa(PedidoSobremesa sobremesa) {
         this.sobremesa.add(sobremesa);
+        this.confeitariaFinalizada = false;
     }
 
     public int getKm() {
@@ -71,6 +87,53 @@ public class Comanda implements ComandaInterface {
     public double getValorKm() {
         return valorKm;
     }
+    
+    
+    // FINALIZADOS || GET
+
+    public boolean getGrelhaFinalizada() {
+        return grelhaFinalizada;
+    }
+
+    public boolean getBarFinalizado() {
+        return barFinalizado;
+    }
+
+    public boolean getConfeitariaFinalizada() {
+        return confeitariaFinalizada;
+    }
+    
+    // FINALIZADOS || SET
+
+    public void setGrelhaFinalizada(boolean grelhaFinalizada) {
+        this.grelhaFinalizada = grelhaFinalizada;
+    }
+
+    public void setBarFinalizado(boolean bebida) {
+        this.barFinalizado = bebida;
+    }
+
+    public void setConfeitariaFinalizada(boolean sobremesa) {
+        this.confeitariaFinalizada = sobremesa;
+    }
+
+    // get Listas
+    
+    public List<PedidoLanche> getLanches()
+    {
+        return Collections.unmodifiableList(new ArrayList<>(lanche));
+    }
+    
+    public List<PedidoBebida> getBebida()
+    {
+        return Collections.unmodifiableList(new ArrayList<>(bebida));
+    }
+    
+    public List<PedidoSobremesa> getSobremesa()
+    {
+        return Collections.unmodifiableList(new ArrayList<>(sobremesa));
+    }
+    
 
     @Override
     public double calcularTotal() {
@@ -94,6 +157,8 @@ public class Comanda implements ComandaInterface {
         return valorLanches + valorBebidas + valorSobremesa;
     }
 
+    
+    
     @Override
     public void getDescricao(boolean detalhada) {
         if (detalhada) {
@@ -144,13 +209,29 @@ public class Comanda implements ComandaInterface {
             for (PedidoSobremesa atual : sobremesa) {
                 System.out.println(atual.getSobremesa().getNome());
             }
+            
+            
             // Se for delivery
             if (delivery) {
                 System.out.println("Frete:\n");
                 System.out.println("Valor Frete: R$" + getValorKm() + "\n");
             }
+            
+            
             // Valor total da compra
             System.out.println("Valor Total: R$" + calcularTotal());
         }
+        
+        
     }
+    
+    
+    
+    // Estar finalizado
+    
+    public boolean isFinish()
+    {
+        return this.grelhaFinalizada && this.barFinalizado && this.confeitariaFinalizada;
+    }
+    
 }

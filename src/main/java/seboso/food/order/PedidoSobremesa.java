@@ -1,6 +1,7 @@
 package seboso.food.order;
 
 public class PedidoSobremesa {
+    
     private Sobremesa sobremesa;
     private boolean acucar;
 
@@ -11,6 +12,19 @@ public class PedidoSobremesa {
     PedidoSobremesa(Sobremesa sobremesa, boolean acucar) {
         setSobremesa(sobremesa);
         setAcucar(acucar);
+    }
+    
+    public void fazerSobremesa()
+    {
+        sobremesa.modoPreparo();
+        if(this.acucar )
+        {
+            System.out.println("Adicionar COM açucar");
+        }
+        else
+        {
+            System.out.println("preparar SEM açucar");
+        }
     }
 
     public Sobremesa getSobremesa() {
