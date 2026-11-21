@@ -148,17 +148,24 @@ public class Telas {
                         estado.comanda.setBebida(pedidoBebida);
                     }
 
-                    /*
                     // Usuário seleciona uma sobremesa
                     case 3 -> {
-                        for (Sobremesa atual : sobremesas) {
-                            if (estado.input == atual.getOpcao()) {
-                                return true;
-                            }
-                        }
-                    }
+                        Sobremesa sobremesa = cardapio.getSobremesa(estado.input);
+                        PedidoSobremesa pedidoSobremesa = new PedidoSobremesa(sobremesa);
 
-                     */
+                        System.out.println("\nVocê gostaria de pedir sem açúcar?");
+                        System.out.println("1 - Sim");
+                        System.out.println("2 - Não");
+
+                        do {
+                            System.out.print("\nSua escolha: ");
+                            estado.input = Utils.ReceberInputInt();
+                            // Usuário seleciona se quer com ou sem açucar
+                            pedidoSobremesa.setAcucar(estado.input == 2);
+                        } while (estado.input < 1 || estado.input > 2);
+
+                        estado.comanda.setSobremesa(pedidoSobremesa);
+                    }
                 }
 
                 estado.total = estado.comanda.calcularTotal();
