@@ -31,12 +31,7 @@ public class Cliente extends Pessoa {
     }
 
     public void setNumero(String numero) {
-        int num = Integer.parseInt(String.valueOf(numero));
-        if (num < 0) {
-            throw new IllegalArgumentException("Número de casa inválido!");
-        } else {
-            this.numero = numero;
-        }
+        this.numero = numero;
     }
 
     public String getBairro() {

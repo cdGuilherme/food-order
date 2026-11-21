@@ -35,15 +35,17 @@ public class Telas {
         System.out.println("<< Novo Pedido >>\n");
 
         // Pede o nome do usuário
-        estado.nome = Utils.ReceberInputTexto(estado.s, "Por favor informe o seu nome ou digite 0 para voltar: ");
-        if (estado.nome == null) {
+        String nome = Utils.ReceberInputTexto(estado.s, "Por favor informe o seu nome ou digite 0 para voltar: ");
+        estado.cliente.setNome(nome);
+        estado.comanda.setCliente(estado.cliente);
+        if (estado.cliente.getNome() == null) {
             estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
             return;
         }
 
         // Pergunta se quer delivery ou retira no balcão
         do {
-            System.out.println("\nOlá " + estado.nome + "! Você gostaria de pedir por delivery ou retirar o pedido no balcão?");
+            System.out.println("\nOlá " + estado.cliente.getNome() + "! Você gostaria de pedir por delivery ou retirar o pedido no balcão?");
             System.out.println("1 - Delivery");
             System.out.println("2 - Retirar no balcão");
             System.out.println("0 - Voltar");
@@ -76,14 +78,6 @@ public class Telas {
         // Exibindo na tela
         cardapio.iniciarCardapio();
         cardapio.imprimirCardapio();
-
-        // OBS CARDÁPIO:
-        // - Identificar cada produto com um número que pode ser selecionado no console, a partir de 10
-        // - No lugar de exibir os adicionais, deve ser exibido as sobremesas
-        // - Quando selecionar um produto, o usuário deve ter a opção de escolher:
-        //   - Adicionais se for lanche
-        //   - Tamanho se for uma bebida
-        //   - Opções sem açúcar se for uma sobremesa
 
         System.out.printf("\nTotal: R$ %.2f\n", estado.total);
 
@@ -189,10 +183,9 @@ public class Telas {
         Utils.LimparConsole(estado);
         Telas.DesenharLogo();
 
-        System.out.println("<< Meu Pedido >>");
+        System.out.println("<< Meu Pedido >>\n");
 
-        // OBS VER PEDIDO:
-        // - Aqui deve ser exibido todos os produtos que o usuário selecionou na tela do cardápio
+        estado.comanda.getDescricao(false);
 
         System.out.printf("\nTotal: R$ %.2f\n", estado.total);
 
@@ -227,35 +220,35 @@ public class Telas {
                 // CEP
                 input = Utils.ReceberInputTexto(estado.s, "Digite seu CEP: ");
                 if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cep = input;
+                estado.cliente.setCep(input);
 
                 // Nome da rua
                 input = Utils.ReceberInputTexto(estado.s, "Digite o nome da rua: ");
                 if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.endereco = input;
+                estado.cliente.setRua(input);
 
                 // Número
                 input = Utils.ReceberInputTexto(estado.s, "Digite o número e complemento se houver: ");
                 if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.numero = input;
+                estado.cliente.setNumero(input);
 
                 // Bairro
                 input = Utils.ReceberInputTexto(estado.s, "Digite o nome do bairro: ");
                 if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.bairro = input;
+                estado.cliente.setBairro(input);
 
                 // Cidade
                 input = Utils.ReceberInputTexto(estado.s, "Digite a cidade: ");
                 if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cidade = input;
+                estado.cliente.setCidade(input);
                 // @formatter:on
                 System.out.println();
             }
 
             // Exibindo o endereço digitado
             System.out.println("Seu endereço:");
-            System.out.println("CEP: " + estado.cep);
-            System.out.println("Endereço: Rua " + estado.endereco + ", nº" + estado.numero + " - " + estado.bairro + ", " + estado.cidade + "/" + estado.uf);
+            System.out.println("CEP: " + estado.cliente.getCep());
+            System.out.println("Endereço: Rua " + estado.cliente.getRua() + ", nº" + estado.cliente.getNumero() + " - " + estado.cliente.getBairro() + ", " + estado.cliente.getCidade() + "/" + estado.uf);
             System.out.println();
 
             do {

@@ -29,6 +29,10 @@ public class Comanda implements ComandaInterface {
         return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public int getComanda() {
         return numComanda;
     }
@@ -133,16 +137,26 @@ public class Comanda implements ComandaInterface {
 
             // Print do pedido resumido
             // Lanches
+            System.out.println("- Lanches e adicionais:");
             for (PedidoLanche atual : lanche) {
-                System.out.println(atual.getNome());
+                System.out.printf("%s: R$ %.2f\n", atual.getNome(), atual.getPreco());
+
+                for (Adicional adicionalAtual : atual.getAdicionais()) {
+                    System.out.printf("+%s\n", adicionalAtual.getNome());
+                }
+                System.out.println();
             }
             // Bebidas
+            System.out.println("- Bebidas:");
             for (PedidoBebida atual : bebida) {
-                System.out.println(atual.getBebida().getNome());
+                System.out.printf("%s: R$ %.2f\n", atual.getBebida().getNome(), atual.getPreco(atual.getTamanho()));
+                System.out.println();
             }
             // Sobremesas
+            System.out.println("- Sobremesas:");
             for (PedidoSobremesa atual : sobremesa) {
-                System.out.println(atual.getSobremesa().getNome());
+                System.out.printf("%s: R$ %.2f\n", atual.getSobremesa().getNome(), atual.getPreco());
+                System.out.println();
             }
             // Se for delivery
             if (delivery) {
@@ -150,7 +164,7 @@ public class Comanda implements ComandaInterface {
                 System.out.println("Valor Frete: R$" + getValorKm() + "\n");
             }
             // Valor total da compra
-            System.out.println("Valor Total: R$" + calcularTotal());
+            System.out.printf("Subtotal: R$ %.2f\n", calcularTotal());
         }
     }
 }

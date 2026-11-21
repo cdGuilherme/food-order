@@ -37,13 +37,8 @@ public class EstadoApp {
     public int qtdPedidos = 0;
 
     Comanda comanda = new Comanda(qtdPedidos + 1);
+    Cliente cliente = new Cliente("a");
 
-    public String nome; // Nome do usuário
-    public String cep;
-    public String endereco;
-    public String numero;
-    public String bairro;
-    public String cidade;
     public String uf = "SP";
     public boolean enderecoConfirmado = false;
 
@@ -65,13 +60,14 @@ public class EstadoApp {
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
         comanda = new Comanda(qtdPedidos + 1);
+        cliente = new Cliente("a");
 
-        nome = null;
-        cep = null;
-        endereco = null;
-        numero = null;
-        bairro = null;
-        cidade = null;
+        cliente.setNome("a");
+        cliente.setCep("00000000");
+        cliente.setRua("a");
+        cliente.setNumero("20, abc");
+        cliente.setBairro("a");
+        cliente.setCidade("a");
 
         enderecoConfirmado = false;
         delivery = true;
