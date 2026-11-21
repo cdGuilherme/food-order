@@ -99,16 +99,16 @@ public class Telas {
         // Usuário seleciona uma das opções válidas no cardápio
         if (cardapio.opcaoValida(estado.input)) {
             if (estado.input < 40) {
-                System.out.println("Opção selecionada: ");
+                System.out.println("\nOpção selecionada: ");
                 cardapio.imprimirOpcao(estado.input);
 
                 switch ((estado.input - 1) / 10) {
+                    // Usuário seleciona um lanche
                     case 1 -> {
-                        // Usuário seleciona um lanche
                         Lanche lanche = cardapio.getLanche(estado.input);
                         PedidoLanche pedidoLanche = new PedidoLanche(lanche);
 
-                        System.out.println("Selecione um adicional ou 0 para finalizar:");
+                        System.out.println("\nSelecione um adicional ou 0 para finalizar:");
                         cardapio.imprimirAdicionais();
 
                         do {
@@ -117,20 +117,37 @@ public class Telas {
                             // Usuário seleciona um adicional
                             if (estado.input >= 41 && estado.input <= 45) {
                                 pedidoLanche.setAdicionais(cardapio.getAdicional(estado.input));
-                                System.out.println("Adicional adicionado com sucesso!");
+                                System.out.println("Adicional adicionado com sucesso!\n");
                             }
                         } while (estado.input >= 41 && estado.input <= 45);
 
                         estado.comanda.setLanche(pedidoLanche);
                     }
-                    /*
+
+                    // Usuário seleciona uma bebida
                     case 2 -> {
-                        for (Bebida atual : bebidas) {
-                            if (estado.input == atual.getOpcao()) {
-                                return true;
+                        Bebida bebida = cardapio.getBebida(estado.input);
+                        PedidoBebida pedidoBebida = new PedidoBebida(bebida);
+
+                        System.out.println("\nEscolha o tamanho da bebida:");
+                        System.out.printf("1 - Pequena R$ %.2f\n", pedidoBebida.getPreco('P'));
+                        System.out.printf("2 - Média R$ %.2f\n", pedidoBebida.getPreco('M'));
+                        System.out.printf("3 - Grande R$ %.2f\n", pedidoBebida.getPreco('G'));
+
+                        do {
+                            System.out.print("Sua escolha: ");
+                            estado.input = Utils.ReceberInputInt();
+                            // Usuário seleciona um tamanho
+                            if (estado.input < 1 || estado.input > 3) {
+                                pedidoBebida.setTamanho(estado.input);
                             }
-                        }
+                        } while (estado.input < 1 || estado.input > 3);
+
+                        estado.comanda.setBebida(pedidoBebida);
                     }
+
+                    /*
+                    // Usuário seleciona uma sobremesa
                     case 3 -> {
                         for (Sobremesa atual : sobremesas) {
                             if (estado.input == atual.getOpcao()) {
@@ -138,13 +155,7 @@ public class Telas {
                             }
                         }
                     }
-                    case 4 -> {
-                        for (Adicional atual : adicionais) {
-                            if (estado.input == atual.getOpcao()) {
-                                return true;
-                            }
-                        }
-                    }
+
                      */
                 }
 

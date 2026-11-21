@@ -4,8 +4,7 @@ public class PedidoBebida {
     private char tamanho;
     private Bebida bebida;
 
-    PedidoBebida(char tamanho, Bebida bebida) {
-        setTamanho(tamanho);
+    PedidoBebida(Bebida bebida) {
         setBebida(bebida);
     }
 
@@ -21,11 +20,32 @@ public class PedidoBebida {
         return tamanho;
     }
 
-    public void setTamanho(char tamanho) {
-        this.tamanho = tamanho;
+    public void setTamanho(int tamanho) {
+        switch (tamanho) {
+            case 1 -> {
+                this.tamanho = 'P';
+            }
+            case 2 -> {
+                this.tamanho = 'M';
+            }
+            case 3 -> {
+                this.tamanho = 'G';
+            }
+        }
     }
 
-    public double getPreco() {
-        return bebida.getPreco();
+    public double getPreco(char tamanho) {
+        switch (tamanho) {
+            case 'P' -> {
+                return bebida.getPreco();
+            }
+            case 'M' -> {
+                return bebida.getPreco() + 3;
+            }
+            case 'G' -> {
+                return bebida.getPreco() + 6;
+            }
+        }
+        return 0;
     }
 }

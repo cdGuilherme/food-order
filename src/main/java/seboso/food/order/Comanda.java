@@ -82,7 +82,7 @@ public class Comanda implements ComandaInterface {
             valorLanches += atual.getPreco();
         }
         for (PedidoBebida atual : bebida) {
-            valorBebidas += atual.getPreco();
+            valorBebidas += atual.getPreco(atual.getTamanho());
         }
         for (PedidoSobremesa atual : sobremesa) {
             valorSobremesa += atual.getPreco();
