@@ -54,28 +54,28 @@ public class Cardapio {
     public void imprimirLanches() {
         System.out.println("Lanches:");
         for (Lanche atual : lanches) {
-            System.out.println(atual.getNome() + " R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() + " R$" + atual.getPreco());
         }
     }
 
     public void imprimirBebidas() {
         System.out.println("Bebidas:");
         for (Bebida atual : bebidas) {
-            System.out.println(atual.getNome() +" R$" + atual.getPreco());
-        }
-    }
-
-    public void imprimirAdicionais() {
-        System.out.println("Adicionais:");
-        for (Adicional atual : adicionais) {
-            System.out.println(atual.getNome() + " R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() +" R$" + atual.getPreco());
         }
     }
 
     public void imprimirSobremesas() {
         System.out.println("Sobremesas:");
         for (Sobremesa atual : sobremesas) {
-            System.out.println(atual.getNome() + " R$" + atual.getPreco());
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() + " R$" + atual.getPreco());
+        }
+    }
+
+    public void imprimirAdicionais() {
+        System.out.println("Adicionais:");
+        for (Adicional atual : adicionais) {
+            System.out.println(atual.getOpcao() + " - " + atual.getNome() + " R$" + atual.getPreco());
         }
     }
 
@@ -150,5 +150,46 @@ public class Cardapio {
             }
         }
         return false;
+    }
+
+
+    // Retorna o lanche selecionado
+    public Lanche getLanche(int opcao) {
+        for (Lanche atual : lanches) {
+            if (opcao == atual.getOpcao()) {
+                return atual;
+            }
+        }
+        return null;
+    }
+
+    // Retorna a bebida selecionada
+    public Bebida getBebida(int opcao) {
+        for (Bebida atual : bebidas) {
+            if (opcao == atual.getOpcao()) {
+                return atual;
+            }
+        }
+        return null;
+    }
+
+    // Retorna a sobremesa selecionada
+    public Sobremesa getSobremesa(int opcao) {
+        for (Sobremesa atual : sobremesas) {
+            if (opcao == atual.getOpcao()) {
+                return atual;
+            }
+        }
+        return null;
+    }
+
+    // Retorna o adicional selecionado
+    public Adicional getAdicional(int opcao) {
+        for (Adicional atual : adicionais) {
+            if (opcao == atual.getOpcao()) {
+                return atual;
+            }
+        }
+        return null;
     }
 }

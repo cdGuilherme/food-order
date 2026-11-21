@@ -101,6 +101,55 @@ public class Telas {
             if (estado.input < 40) {
                 System.out.println("Opção selecionada: ");
                 cardapio.imprimirOpcao(estado.input);
+
+                switch ((estado.input - 1) / 10) {
+                    case 1 -> {
+                        // Usuário seleciona um lanche
+                        Lanche lanche = cardapio.getLanche(estado.input);
+                        PedidoLanche pedidoLanche = new PedidoLanche(lanche);
+
+                        System.out.println("Selecione um adicional ou 0 para finalizar:");
+                        cardapio.imprimirAdicionais();
+
+                        do {
+                            System.out.print("Sua escolha: ");
+                            estado.input = Utils.ReceberInputInt();
+                            // Usuário seleciona um adicional
+                            if (estado.input >= 41 && estado.input <= 45) {
+                                pedidoLanche.setAdicionais(cardapio.getAdicional(estado.input));
+                                System.out.println("Adicional adicionado com sucesso!");
+                            }
+                        } while (estado.input >= 41 && estado.input <= 45);
+
+                        estado.comanda.setLanche(pedidoLanche);
+                    }
+                    /*
+                    case 2 -> {
+                        for (Bebida atual : bebidas) {
+                            if (estado.input == atual.getOpcao()) {
+                                return true;
+                            }
+                        }
+                    }
+                    case 3 -> {
+                        for (Sobremesa atual : sobremesas) {
+                            if (estado.input == atual.getOpcao()) {
+                                return true;
+                            }
+                        }
+                    }
+                    case 4 -> {
+                        for (Adicional atual : adicionais) {
+                            if (estado.input == atual.getOpcao()) {
+                                return true;
+                            }
+                        }
+                    }
+                     */
+                }
+
+                estado.total = estado.comanda.calcularTotal();
+
                 Utils.EsperarEnter();
                 return;
             }
@@ -274,6 +323,9 @@ public class Telas {
         // OBS FINALIZAÇÃO DO PAGAMENTO:
         // - O pedido atual deve ser adicionado a lista de pedidos com suas informações
         // - Armazenar também o tempo em que o pedido foi finalizado para calcular o tempo até a finalização do pedido
+
+        // Atualiza a quantidade de pedidos feitos
+        estado.qtdPedidos++;
 
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
     }

@@ -7,12 +7,7 @@ public class PedidoLanche {
     private ArrayList<Adicional> adicionais = new ArrayList<>();
 
     PedidoLanche(Lanche lanche) {
-        this(lanche,null);
-    }
-
-    PedidoLanche(Lanche lanche, ArrayList<Adicional> adicionais) {
         this.lanche = lanche;
-        this.adicionais.addAll(adicionais);
     }
 
     public void fazerLanche() {
@@ -20,7 +15,11 @@ public class PedidoLanche {
     }
 
     public double getPreco() {
-        return lanche.getPreco();
+        double totalAdicionais = 0;
+        for (Adicional atual : adicionais) {
+            totalAdicionais += atual.getPreco();
+        }
+        return lanche.getPreco() + totalAdicionais;
     }
 
     public String getNome() {
@@ -33,5 +32,9 @@ public class PedidoLanche {
 
     public ArrayList<Adicional> getAdicionais() {
         return adicionais;
+    }
+
+    public void setAdicionais(Adicional adicional) {
+        this.adicionais.add(adicional);
     }
 }

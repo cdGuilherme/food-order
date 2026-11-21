@@ -8,7 +8,6 @@ public class EstadoApp {
     // Import do scanner para ler as entradas do usuário
     Scanner s = new Scanner(System.in);
 
-
     // Enums //
     // ////////
 
@@ -29,11 +28,15 @@ public class EstadoApp {
     }
 
 
-    // Variáveis //
-    // ////////////
+    // Variáveis e Objetos //
+    // //////////////////////
 
     // OBS VARIÁVEIS GLOBAIS
     // - Mudar a implementação atual dessas variáveis para utilizarem os getters e setters de suas classes respectivas
+
+    public int qtdPedidos = 0;
+
+    Comanda comanda = new Comanda(qtdPedidos + 1);
 
     public String nome; // Nome do usuário
     public String cep;
@@ -46,7 +49,7 @@ public class EstadoApp {
 
     public boolean delivery; // Pedido é delivery ou cliente retira no balcão
     public int input; // Input do usuário para navegar o programa pelo console
-    public double total; // Valor total do pedido atual
+    public double total = comanda.calcularTotal(); // Valor total do pedido atual
 
     public MetodoLimpeza metodoLimpeza = MetodoLimpeza.AMBOS; // Como é feito a limpeza da tela
     public Tela telaAtual = Tela.TELA_INICIAL; // Funcionamento do state machine
@@ -61,6 +64,8 @@ public class EstadoApp {
 
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
+        Comanda comanda = new Comanda(qtdPedidos + 1);
+
         nome = null;
         cep = null;
         endereco = null;
@@ -71,7 +76,7 @@ public class EstadoApp {
         enderecoConfirmado = false;
         delivery = true;
         formaPagamento = null;
-        total = 0.0;
+        total = comanda.calcularTotal();
         input = -1;
     }
 }
