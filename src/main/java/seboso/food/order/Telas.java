@@ -51,15 +51,20 @@ public class Telas {
             System.out.println("0 - Voltar");
             System.out.print("Sua escolha: ");
             estado.input = Utils.ReceberInputInt();
-            if (estado.input == 0) {
-                estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
-                return;
-            }
-            if (estado.input < 1 || estado.input > 2) Utils.PrintOpcaoInvalida();
-        } while (estado.input < 1 || estado.input > 2);
 
-        // Decide se é delivery ou retira no balcão
-        if (estado.input == 2) estado.delivery = false;
+            switch (estado.input) {
+                case 1 -> {
+                    estado.comanda.setDelivery(true);
+                }
+                case 2 -> {
+                    estado.comanda.setDelivery(false);
+                }
+                default -> {
+                    Utils.PrintOpcaoInvalida();
+                    estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+                }
+            }
+        } while (estado.input < 1 || estado.input > 2);
 
         estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
     }
@@ -196,7 +201,15 @@ public class Telas {
         estado.input = Utils.ReceberInputInt();
 
         switch (estado.input) {
-            case 1 -> estado.telaAtual = EstadoApp.Tela.TELA_PAGAMENTO;
+            case 1 -> {
+                if (estado.comanda.calcularTotal() == 0) {
+                    System.out.println("Comanda vazia!");
+                    Utils.EsperarEnter();
+                    estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
+                } else {
+                    estado.telaAtual = EstadoApp.Tela.TELA_PAGAMENTO;
+                }
+            }
             case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
             default -> Utils.PrintOpcaoInvalida();
         }
@@ -211,7 +224,7 @@ public class Telas {
         System.out.println("<< Pagamento >>");
 
         // Pede o endereço do usuário caso é delivery
-        if (estado.delivery) {
+        if (estado.comanda.isDelivery()) {
             if (!estado.enderecoConfirmado) {
                 // @formatter:off
                 String input;
@@ -343,7 +356,8 @@ public class Telas {
         // - O pedido atual deve ser adicionado a lista de pedidos com suas informações
         // - Armazenar também o tempo em que o pedido foi finalizado para calcular o tempo até a finalização do pedido
 
-        // Atualiza a quantidade de pedidos feitos
+        // Adiciona o pedido finalizado à lista e atualiza a quantidade de pedidos
+        estado.comandas.add(estado.comanda);
         estado.qtdPedidos++;
 
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
@@ -361,15 +375,37 @@ public class Telas {
         // - Aqui deve ser exibido todos os pedidos da fila de pedidos
         // - Deverá também ter a opção do usuário selecionar o pedido pela numeração da comanda para ver detalhes
 
-        System.out.println("100 - Pedido Exemplo John Doe");
+        if (estado.comandas.isEmpty()) {
+            System.out.println("Nenhum pedido finalizado.");
+        } else {
+            for (Comanda comanda : estado.comandas) {
+                System.out.printf("%d - Pedido %s - R$ %.2f%n",
+                        comanda.getComanda(),
+                        comanda.getCliente().getNome(),
+                        comanda.calcularTotal() + comanda.calcularFrete());
+            }
+        }
 
         System.out.print("\nSelecione um pedido pela comanda ou digite 0 para sair: ");
         estado.input = Utils.ReceberInputInt();
 
-        switch (estado.input) {
-            case 100 -> estado.telaAtual = EstadoApp.Tela.DETALHES_PEDIDO;
-            case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
-            default -> Utils.PrintOpcaoInvalida();
+        if (estado.input == 0) {
+            estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+            return;
+        }
+
+        estado.comandaSelecionada = null;
+        for (Comanda comanda : estado.comandas) {
+            if (comanda.getComanda() == estado.input) {
+                estado.comandaSelecionada = comanda;
+                break;
+            }
+        }
+
+        if (estado.comandaSelecionada != null) {
+            estado.telaAtual = EstadoApp.Tela.DETALHES_PEDIDO;
+        } else {
+            Utils.PrintOpcaoInvalida();
         }
     }
 
@@ -385,9 +421,9 @@ public class Telas {
         // - Aqui deve ter as informações do pedido
         // - Exibir a etapa atual se for cozinha, ou tempo estimado até entrega se saiu da cozinha e for delivery
 
-        System.out.println("Pedido #100 Exemplo John Doe");
-
-        System.out.println("\n...\n");
+        if (estado.comandaSelecionada != null) {
+            estado.comandaSelecionada.getDescricao(true);
+        }
 
         Utils.EsperarEnter();
         estado.telaAtual = EstadoApp.Tela.LISTA_PEDIDOS;

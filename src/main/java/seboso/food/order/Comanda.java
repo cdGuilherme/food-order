@@ -76,6 +76,13 @@ public class Comanda implements ComandaInterface {
         return valorKm;
     }
 
+    public double calcularFrete() {
+        if (isDelivery()) {
+            return valorFrete = km * valorKm;
+        }
+        return valorFrete;
+    }
+
     @Override
     public double calcularTotal() {
         double valorLanches = 0;
@@ -90,10 +97,6 @@ public class Comanda implements ComandaInterface {
         }
         for (PedidoSobremesa atual : sobremesa) {
             valorSobremesa += atual.getPreco();
-        }
-        if (delivery) {
-            this.valorFrete = valorKm * km;
-            return valorBebidas + valorSobremesa + valorLanches + this.valorFrete;
         }
         return valorLanches + valorBebidas + valorSobremesa;
     }
@@ -129,9 +132,8 @@ public class Comanda implements ComandaInterface {
                 System.out.println("Valor Frete: R$" + getValorKm() + "\n");
             }
             // Valor total da compra
-            System.out.println("Valor Total: R$" + calcularTotal());
+            System.out.printf("Total: R$ %.2f\n", calcularTotal() + calcularFrete());
         } else {
-            //  delivery == true) valor frete e total
             // Print da comanda e Cliente
             System.out.println("Pedido: " + getComanda() + " " + getCliente().getNome() + "\n");
 
@@ -164,7 +166,7 @@ public class Comanda implements ComandaInterface {
             // Se for delivery
             if (delivery) {
                 System.out.println("Frete:\n");
-                System.out.println("Valor Frete: R$" + getValorKm() + "\n");
+                System.out.println("Valor Frete: R$" + calcularFrete() + "\n");
             }
             // Valor total da compra
             System.out.printf("Subtotal: R$ %.2f\n", calcularTotal());

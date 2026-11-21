@@ -27,9 +27,9 @@ public class Lanche extends Produto {
         System.out.println("Pegue o pão "+ getPao() + " parta ao meio e sele na chapa");
         System.out.println("Pese o hamburguer de "+ getHamburguer() +" e frite na chapa até dourar por fora");
         System.out.println("Quando estiver perto de acabar o hamburguer, pegue o queijo "+ getQueijo() +"e coloque por cima abafando com uma tampa para derreter");
-        if (adicionais != null) {
+        if (!adicionais.isEmpty()) {
             for (Adicional atual : adicionais) {
-                atual.modoPreparo(null);
+                atual.modoPreparo();
             }
         }
         System.out.println("Pega a salada "+  getSalada());

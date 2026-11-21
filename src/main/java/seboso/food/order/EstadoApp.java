@@ -3,6 +3,7 @@
 package seboso.food.order;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class EstadoApp {
     // Import do scanner para ler as entradas do usuário
@@ -36,8 +37,11 @@ public class EstadoApp {
 
     public int qtdPedidos = 0;
 
-    Comanda comanda = new Comanda(qtdPedidos + 1);
-    Cliente cliente = new Cliente("a");
+    // Comandas finalizadas e pedido atualmente em edição
+    public ArrayList<Comanda> comandas = new ArrayList<>();
+    public Comanda comanda = new Comanda(qtdPedidos + 1);
+    public Comanda comandaSelecionada;
+    public Cliente cliente = new Cliente("a");
 
     public String uf = "SP";
     public boolean enderecoConfirmado = false;
@@ -72,7 +76,7 @@ public class EstadoApp {
         enderecoConfirmado = false;
         delivery = true;
         formaPagamento = null;
-        total = comanda.calcularTotal();
+        total = comanda.calcularTotal() + comanda.calcularFrete();
         input = -1;
     }
 }
