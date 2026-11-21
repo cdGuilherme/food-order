@@ -371,8 +371,16 @@ public class Telas {
         // - Armazenar também o tempo em que o pedido foi finalizado para calcular o tempo até a finalização do pedido
 
         // Adiciona o pedido finalizado à lista e atualiza a quantidade de pedidos
+        // Adiciona o pedido finalizado à lista de pedidos
         estado.comandas.add(estado.comanda);
+
+        // Atualiza a quantidade de pedidos
         estado.qtdPedidos++;
+
+        // Encaminha a comanda para os setores da cozinha
+        estado.encaminharComanda(estado.comanda);
+
+        Utils.EsperarEnter();
 
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
     }

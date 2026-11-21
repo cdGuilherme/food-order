@@ -43,6 +43,14 @@ public class EstadoApp {
     public Comanda comandaSelecionada;
     public Cliente cliente = new Cliente("a");
 
+    // Fila compartilhada de comandas da cozinha
+    public ArrayList<Comanda> filaComanda = new ArrayList<>();
+
+    // Cozinheiros internos do sistema
+    public Cozinheiro cozinheiroGrelha;
+    public Cozinheiro cozinheiroBar;
+    public Cozinheiro cozinheiroConfeitaria;
+
     public String uf = "SP";
     public boolean enderecoConfirmado = false;
 
@@ -60,7 +68,42 @@ public class EstadoApp {
 
     // OBS MÉTODOS:
     // - Mudar essa implementação atual de limpar os dados do usuário para seus respectivos getters e setters
+    public EstadoApp() {
 
+        // INICIALIZANDO OS COZINHEIROS
+        cozinheiroGrelha = new Cozinheiro("Cozinheiro da Grelha", filaComanda);
+        cozinheiroBar = new Cozinheiro("Cozinheiro do Bar", filaComanda);
+        cozinheiroConfeitaria = new Cozinheiro("Cozinheiro da Confeitaria", filaComanda);
+
+        // JÁ CRIA OS SETORES
+        Cozinha grelha = new Cozinha(cozinheiroGrelha, "grelha");
+        Cozinha bar = new Cozinha(cozinheiroBar, "bar");
+        Cozinha confeitaria = new Cozinha(cozinheiroConfeitaria, "confeitaria");
+
+        // COLOCA UMA COZINHEIRO PARA CADA SETOR JÁ
+        cozinheiroGrelha.setCozinha(grelha);
+        cozinheiroBar.setCozinha(bar);
+        cozinheiroConfeitaria.setCozinha(confeitaria);
+    }
+
+    public void encaminharComanda(Comanda comanda) {
+
+        if (comanda == null) {
+            System.out.println("Não foi possível enviar. Comanda inválida.");
+            return;
+        }
+
+        filaComanda.add(comanda);
+
+        System.out.println(
+            "\nComanda " + comanda.getComanda()
+            + " encaminhada para a cozinha!"
+        );
+
+        cozinheiroGrelha.executarFuncao();
+        cozinheiroBar.executarFuncao();
+        cozinheiroConfeitaria.executarFuncao();
+    }
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
         comanda = new Comanda(qtdPedidos + 1);

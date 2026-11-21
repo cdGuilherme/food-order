@@ -6,12 +6,19 @@ import java.util.Random;
 public class Comanda implements ComandaInterface {
     private int numComanda;
     private Cliente cliente;
+    
     private ArrayList<PedidoLanche> lanche = new ArrayList<>();
     private ArrayList<PedidoBebida> bebida = new ArrayList<>();
     private ArrayList<PedidoSobremesa> sobremesa = new ArrayList<>();
+
     private int mesa;
     private boolean delivery;
     private double valorFrete;
+
+    // Controle de finalização dos setores
+    private boolean grelhaFinalizada = true;
+    private boolean barFinalizado = true;
+    private boolean confeitariaFinalizada = true;
 
     // Número aleatório de km do pedido //
     // ///////////////////////////////////
@@ -56,17 +63,35 @@ public class Comanda implements ComandaInterface {
         this.delivery = delivery;
     }
 
+
+    public ArrayList<PedidoLanche> getLanches() {
+        return this.lanche;
+    }
+
+    public ArrayList<PedidoBebida> getBebida() {
+        return this.bebida;
+    }
+
+    public ArrayList<PedidoSobremesa> getSobremesa() {
+        return this.sobremesa;
+    }
+
     public void setLanche(PedidoLanche lanche) {
         this.lanche.add(lanche);
+        this.grelhaFinalizada = false;
     }
 
     public void setBebida(PedidoBebida bebida) {
         this.bebida.add(bebida);
+        this.barFinalizado = false;
     }
 
     public void setSobremesa(PedidoSobremesa sobremesa) {
         this.sobremesa.add(sobremesa);
+        this.confeitariaFinalizada = false;
     }
+
+
 
     public int getKm() {
         return km;
@@ -172,5 +197,23 @@ public class Comanda implements ComandaInterface {
             // Valor total da compra
             System.out.printf("Subtotal: R$ %.2f\n", calcularTotal());
         }
+    }
+
+    // Controle de finalização da cozinha
+
+    public void setGrelhaFinalizada(boolean finalizada) {
+        this.grelhaFinalizada = finalizada;
+    }
+
+    public void setBarFinalizado(boolean finalizado) {
+        this.barFinalizado = finalizado;
+    }
+
+    public void setConfeitariaFinalizada(boolean finalizada) {
+        this.confeitariaFinalizada = finalizada;
+    }
+
+    public boolean isFinish() {
+        return grelhaFinalizada && barFinalizado && confeitariaFinalizada;
     }
 }

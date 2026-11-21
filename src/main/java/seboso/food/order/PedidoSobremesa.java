@@ -32,4 +32,14 @@ public class PedidoSobremesa {
     public double getPreco() {
         return sobremesa.getPreco();
     }
+
+    public void fazerSobremesa() {
+    sobremesa.modoPreparo();
+
+    if (this.acucar) {
+        System.out.println("Adicionar COM açúcar");
+    } else {
+        System.out.println("Preparar SEM açúcar");
+    }
+}
 }
