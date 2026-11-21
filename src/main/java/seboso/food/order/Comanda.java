@@ -149,15 +149,18 @@ public class Comanda implements ComandaInterface {
             // Bebidas
             System.out.println("- Bebidas:");
             for (PedidoBebida atual : bebida) {
-                System.out.printf("%s: R$ %.2f\n", atual.getBebida().getNome(), atual.getPreco(atual.getTamanho()));
-                System.out.println();
+                System.out.printf("%s %c: R$ %.2f\n", atual.getBebida().getNome(), atual.getTamanho(), atual.getPreco(atual.getTamanho()));
             }
+            System.out.println();
             // Sobremesas
             System.out.println("- Sobremesas:");
             for (PedidoSobremesa atual : sobremesa) {
-                System.out.printf("%s: R$ %.2f\n", atual.getSobremesa().getNome(), atual.getPreco());
-                System.out.println();
+                if (atual.isAcucar())
+                    System.out.printf("%s com açúcar: R$ %.2f\n", atual.getSobremesa().getNome(), atual.getPreco());
+                else
+                    System.out.printf("%s sem açúcar: R$ %.2f\n", atual.getSobremesa().getNome(), atual.getPreco());
             }
+            System.out.println();
             // Se for delivery
             if (delivery) {
                 System.out.println("Frete:\n");

@@ -218,9 +218,15 @@ public class Telas {
                 System.out.println("\nVamos precisar do seu endereço para realizar a entrega, ou digite 0 para voltar");
 
                 // CEP
-                input = Utils.ReceberInputTexto(estado.s, "Digite seu CEP: ");
-                if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cliente.setCep(input);
+                try {
+                    input = Utils.ReceberInputTexto(estado.s, "Digite seu CEP: ");
+                    if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
+                    estado.cliente.setCep(input);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    Utils.EsperarEnter();
+                    return;
+                }
 
                 // Nome da rua
                 input = Utils.ReceberInputTexto(estado.s, "Digite o nome da rua: ");
