@@ -64,7 +64,7 @@ public class EstadoApp {
 
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
-        Comanda comanda = new Comanda(qtdPedidos + 1);
+        comanda = new Comanda(qtdPedidos + 1);
 
         nome = null;
         cep = null;
