@@ -12,7 +12,9 @@ public class PedidoLanche {
 
     PedidoLanche(Lanche lanche, ArrayList<Adicional> adicionais) {
         this.lanche = lanche;
-        this.adicionais.addAll(adicionais);
+        if (adicionais != null) {
+            this.adicionais.addAll(adicionais);
+        }
     }
 
     public void fazerLanche() {

@@ -115,6 +115,38 @@ public class Cardapio {
             }
         }
     }
+    
+    
+    
+    // Busca uma bebida pelo número da opção
+    public Bebida buscarBebida(int opcao) {
+        for (Bebida atual : bebidas) {
+            if (atual.getOpcao() == opcao) {
+                return atual;
+            }
+        }
+        return null;
+    }
+
+    // Busca uma sobremesa pelo número da opção
+    public Sobremesa buscarSobremesa(int opcao) {
+        for (Sobremesa atual : sobremesas) {
+            if (atual.getOpcao() == opcao) {
+                return atual;
+            }
+        }
+        return null;
+    }
+    
+    public Lanche buscarLanche(int opcao) {
+        for (Lanche atual : lanches) {
+            if (atual.getOpcao() == opcao) {
+                return atual;
+            }
+        }
+
+        return null;
+    }
 
 
     // Retorna true se a opção é válida ou false se não
@@ -127,6 +159,8 @@ public class Cardapio {
                     }
                 }
             }
+            
+            
             case 2 -> {
                 for (Bebida atual : bebidas) {
                     if (opcao == atual.getOpcao()) {

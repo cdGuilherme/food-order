@@ -59,6 +59,9 @@ public class Telas {
         // Decide se é delivery ou retira no balcão
         if (estado.input == 2) estado.delivery = false;
 
+        estado.iniciarNovaComanda();
+
+        estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
         estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
     }
 
@@ -97,22 +100,129 @@ public class Telas {
         estado.input = Utils.ReceberInputInt();
 
         // Usuário seleciona uma das opções válidas no cardápio
-        if (cardapio.opcaoValida(estado.input)) {
+        /*if (cardapio.opcaoValida(estado.input)) {
             if (estado.input < 40) {
                 System.out.println("Opção selecionada: ");
                 cardapio.imprimirOpcao(estado.input);
                 Utils.EsperarEnter();
                 return;
             }
+        }*/
+        
+        if (cardapio.opcaoValida(estado.input)) {
+
+        // Lanches: opções 11 a 15
+        if (estado.input >= 11 && estado.input <= 15) {
+
+            Lanche lanche = cardapio.buscarLanche(estado.input);
+
+            PedidoLanche pedido = new PedidoLanche(lanche);
+
+            estado.comandaAtual.setLanche(pedido);
+            
+            System.out.println("DEBUG: Lanche adicionado à comanda "
+                    + estado.comandaAtual.getComanda());
+
+            System.out.println("DEBUG: Total da comanda: R$ "
+                    + estado.comandaAtual.calcularTotal());
+
+            System.out.println("\nLanche adicionado ao pedido!");
         }
 
-        // Usuário seleciona uma opção de navegação
-        switch (estado.input) {
-            case 1 -> estado.telaAtual = EstadoApp.Tela.VER_PEDIDO;
-            case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
-            default -> Utils.PrintOpcaoInvalida();
+        else if (estado.input >= 21 && estado.input <= 25) {
+
+            Bebida bebida = cardapio.buscarBebida(estado.input);
+
+            String tamanhoEscolhido;
+
+            do {
+                System.out.println("\nQual o tamanho da bebida?");
+                System.out.println("P - Pequeno");
+                System.out.println("M - Médio");
+                System.out.println("G - Grande");
+                System.out.println("0 - Cancelar");
+
+                tamanhoEscolhido = Utils.ReceberInputTexto(
+                        estado.s, "Sua escolha: "
+                );
+
+                if (tamanhoEscolhido == null) {
+                    return;
+                }
+
+                tamanhoEscolhido = tamanhoEscolhido.toUpperCase();
+
+                if (!tamanhoEscolhido.equals("P")
+                        && !tamanhoEscolhido.equals("M")
+                        && !tamanhoEscolhido.equals("G")) {
+                    Utils.PrintOpcaoInvalida();
+                }
+
+            } while (!tamanhoEscolhido.equals("P")
+                    && !tamanhoEscolhido.equals("M")
+                    && !tamanhoEscolhido.equals("G"));
+
+            PedidoBebida pedido = new PedidoBebida(
+                    tamanhoEscolhido.charAt(0),
+                    bebida
+            );
+
+            estado.comandaAtual.setBebida(pedido);
+
+            System.out.println("\nBebida adicionada ao pedido!");
         }
-    }
+
+        // Sobremesas: opções 31 a 35
+            else if (estado.input >= 31 && estado.input <= 35) {
+
+                Sobremesa sobremesa = cardapio.buscarSobremesa(estado.input);
+
+                int opcaoAcucar;
+
+                do {
+                    System.out.println("\nComo deseja sua sobremesa?");
+                    System.out.println("1 - Com açúcar");
+                    System.out.println("2 - Sem açúcar");
+                    System.out.println("0 - Cancelar");
+                    System.out.print("Sua escolha: ");
+
+                    opcaoAcucar = Utils.ReceberInputInt();
+
+                    if (opcaoAcucar < 0 || opcaoAcucar > 2) {
+                        Utils.PrintOpcaoInvalida();
+                    }
+
+                } while (opcaoAcucar < 0 || opcaoAcucar > 2);
+
+                if (opcaoAcucar == 0) {
+                    return;
+                }
+
+                boolean comAcucar = opcaoAcucar == 1;
+
+                PedidoSobremesa pedido = new PedidoSobremesa(
+                        sobremesa,
+                        comAcucar
+                );
+
+                estado.comandaAtual.setSobremesa(pedido);
+
+                System.out.println("\nSobremesa adicionada ao pedido!");
+            }
+
+                    estado.total = estado.comandaAtual.calcularTotal();
+
+                    Utils.EsperarEnter();
+                    return;
+                }
+
+            // Usuário seleciona uma opção de navegação
+            switch (estado.input) {
+                case 1 -> estado.telaAtual = EstadoApp.Tela.VER_PEDIDO;
+                case 0 -> estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+                default -> Utils.PrintOpcaoInvalida();
+            }
+        }
 
 
     // Tela de ver o pedido
@@ -274,8 +384,14 @@ public class Telas {
         // OBS FINALIZAÇÃO DO PAGAMENTO:
         // - O pedido atual deve ser adicionado a lista de pedidos com suas informações
         // - Armazenar também o tempo em que o pedido foi finalizado para calcular o tempo até a finalização do pedido
+        
+        // Encaminha a comanda para os setores da cozinha
+        estado.encaminharComanda(estado.comandaAtual);
+        Utils.EsperarEnter();
 
         estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+        
+        
     }
 
 
