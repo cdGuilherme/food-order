@@ -15,7 +15,7 @@ public class EstadoApp {
 
     // Telas disponíveis para serem selecionadas pelo state machine
     public enum Tela {
-        TELA_INICIAL, NOVO_PEDIDO, TELA_CARDAPIO, VER_PEDIDO, TELA_PAGAMENTO, LISTA_PEDIDOS, DETALHES_PEDIDO, SAIR
+        TELA_INICIAL, NOVO_PEDIDO, TELA_ENDERECO, TELA_CARDAPIO, VER_PEDIDO, TELA_PAGAMENTO, LISTA_PEDIDOS, DETALHES_PEDIDO, SAIR
     }
 
     // Métodos disponíveis para limpeza de tela

@@ -55,16 +55,101 @@ public class Telas {
             switch (estado.input) {
                 case 1 -> {
                     estado.comanda.setDelivery(true);
+                    estado.telaAtual = EstadoApp.Tela.TELA_ENDERECO;
+                    return;
                 }
                 case 2 -> {
                     estado.comanda.setDelivery(false);
                 }
                 default -> {
                     Utils.PrintOpcaoInvalida();
-                    estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
                 }
             }
         } while (estado.input < 1 || estado.input > 2);
+
+        estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
+    }
+
+
+    // Tela para pedir o endereço do usuário
+    public static void TelaEndereco(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Preencher Endereço >>\n");
+
+        // Pede o endereço do usuário caso é delivery
+        if (estado.comanda.isDelivery()) {
+            if (!estado.enderecoConfirmado) {
+                // @formatter:off
+                String input;
+                System.out.println("Vamos precisar do seu endereço para realizar a entrega, ou digite 0 para cancelar");
+
+                // CEP
+                try {
+                    input = Utils.ReceberInputTexto(estado.s, "Digite seu CEP: ");
+                    if (input == null) { estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO; return; }
+                    estado.cliente.setCep(input);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    Utils.EsperarEnter();
+                    return;
+                }
+
+                // Nome da rua
+                input = Utils.ReceberInputTexto(estado.s, "Digite o nome da rua: ");
+                if (input == null) { estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO; return; }
+                estado.cliente.setRua(input);
+
+                // Número
+                input = Utils.ReceberInputTexto(estado.s, "Digite o número e complemento se houver: ");
+                if (input == null) { estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO; return; }
+                estado.cliente.setNumero(input);
+
+                // Bairro
+                input = Utils.ReceberInputTexto(estado.s, "Digite o nome do bairro: ");
+                if (input == null) { estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO; return; }
+                estado.cliente.setBairro(input);
+
+                // Cidade
+                input = Utils.ReceberInputTexto(estado.s, "Digite a cidade: ");
+                if (input == null) { estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO; return; }
+                estado.cliente.setCidade(input);
+                // @formatter:on
+                System.out.println();
+            }
+
+            // Exibindo o endereço digitado
+            System.out.println("Seu endereço:");
+            System.out.println("CEP: " + estado.cliente.getCep());
+            System.out.println("Endereço: Rua " + estado.cliente.getRua() + ", nº" + estado.cliente.getNumero() + " - " + estado.cliente.getBairro() + ", " + estado.cliente.getCidade() + "/" + estado.uf);
+            System.out.println();
+
+            do {
+                // Confirmação do endereço
+                System.out.println("Os dados estão corretos?");
+                System.out.println("1 - Sim, continuar");
+                System.out.println("2 - Não, revisar");
+                System.out.println("0 - Voltar");
+                System.out.print("Sua escolha: ");
+
+                estado.input = Utils.ReceberInputInt();
+
+                if (estado.input == 0) {
+                    estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO;
+                    return;
+                }
+
+                if (estado.input == 2) {
+                    estado.enderecoConfirmado = false;
+                    return;
+                }
+
+                if (estado.input == 1) estado.enderecoConfirmado = true;
+
+                if (estado.input < 1 || estado.input > 2) Utils.PrintOpcaoInvalida();
+            } while (estado.input < 1 || estado.input > 2);
+        }
 
         estado.telaAtual = EstadoApp.Tela.TELA_CARDAPIO;
     }
@@ -84,7 +169,9 @@ public class Telas {
         cardapio.iniciarCardapio();
         cardapio.imprimirCardapio();
 
-        System.out.printf("\nTotal: R$ %.2f\n", estado.total);
+        System.out.printf("\nValor Frete: R$ %.2f\n", estado.comanda.calcularFrete());
+        System.out.printf("Subtotal:    R$ %.2f\n", estado.comanda.calcularTotal());
+        System.out.printf("Total:       R$ %.2f\n", estado.comanda.calcularTotal() + estado.comanda.calcularFrete());
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Ver pedido");
@@ -192,7 +279,7 @@ public class Telas {
 
         estado.comanda.getDescricao(false);
 
-        System.out.printf("\nTotal: R$ %.2f\n", estado.total);
+        System.out.printf("\nTotal: R$ %.2f\n", estado.comanda.calcularTotal() + estado.comanda.calcularFrete());
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Finalizar pedido");
@@ -223,81 +310,8 @@ public class Telas {
 
         System.out.println("<< Pagamento >>");
 
-        // Pede o endereço do usuário caso é delivery
-        if (estado.comanda.isDelivery()) {
-            if (!estado.enderecoConfirmado) {
-                // @formatter:off
-                String input;
-                System.out.println("\nVamos precisar do seu endereço para realizar a entrega, ou digite 0 para voltar");
-
-                // CEP
-                try {
-                    input = Utils.ReceberInputTexto(estado.s, "Digite seu CEP: ");
-                    if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                    estado.cliente.setCep(input);
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                    Utils.EsperarEnter();
-                    return;
-                }
-
-                // Nome da rua
-                input = Utils.ReceberInputTexto(estado.s, "Digite o nome da rua: ");
-                if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cliente.setRua(input);
-
-                // Número
-                input = Utils.ReceberInputTexto(estado.s, "Digite o número e complemento se houver: ");
-                if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cliente.setNumero(input);
-
-                // Bairro
-                input = Utils.ReceberInputTexto(estado.s, "Digite o nome do bairro: ");
-                if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cliente.setBairro(input);
-
-                // Cidade
-                input = Utils.ReceberInputTexto(estado.s, "Digite a cidade: ");
-                if (input == null) { estado.telaAtual = EstadoApp.Tela.VER_PEDIDO; return; }
-                estado.cliente.setCidade(input);
-                // @formatter:on
-                System.out.println();
-            }
-
-            // Exibindo o endereço digitado
-            System.out.println("Seu endereço:");
-            System.out.println("CEP: " + estado.cliente.getCep());
-            System.out.println("Endereço: Rua " + estado.cliente.getRua() + ", nº" + estado.cliente.getNumero() + " - " + estado.cliente.getBairro() + ", " + estado.cliente.getCidade() + "/" + estado.uf);
-            System.out.println();
-
-            do {
-                // Confirmação do endereço
-                System.out.println("Os dados estão corretos?");
-                System.out.println("1 - Sim, continuar");
-                System.out.println("2 - Não, revisar");
-                System.out.println("0 - Voltar");
-                System.out.print("Sua escolha: ");
-
-                estado.input = Utils.ReceberInputInt();
-
-                if (estado.input == 0) {
-                    estado.telaAtual = EstadoApp.Tela.VER_PEDIDO;
-                    return;
-                }
-
-                if (estado.input == 2) {
-                    estado.enderecoConfirmado = false;
-                    return;
-                }
-
-                if (estado.input == 1) estado.enderecoConfirmado = true;
-
-                if (estado.input < 1 || estado.input > 2) Utils.PrintOpcaoInvalida();
-            } while (estado.input < 1 || estado.input > 2);
-        }
-
         // Valor total
-        System.out.printf("\nTotal: R$ %.2f\n", estado.total);
+        System.out.printf("\nTotal: R$ %.2f\n", estado.comanda.calcularTotal() + estado.comanda.calcularFrete());
 
         // Forma de pagamento
         do {
@@ -379,10 +393,7 @@ public class Telas {
             System.out.println("Nenhum pedido finalizado.");
         } else {
             for (Comanda comanda : estado.comandas) {
-                System.out.printf("%d - Pedido %s - R$ %.2f%n",
-                        comanda.getComanda(),
-                        comanda.getCliente().getNome(),
-                        comanda.calcularTotal() + comanda.calcularFrete());
+                System.out.printf("%d - Pedido %s - R$ %.2f%n", comanda.getComanda(), comanda.getCliente().getNome(), comanda.calcularTotal() + comanda.calcularFrete());
             }
         }
 

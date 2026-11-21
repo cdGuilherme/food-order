@@ -12,6 +12,7 @@ public class FoodOrder {
             switch (estado.telaAtual) {
                 case TELA_INICIAL -> Telas.TelaInicial(estado);
                 case NOVO_PEDIDO -> Telas.NovoPedido(estado);
+                case TELA_ENDERECO -> Telas.TelaEndereco(estado);
                 case TELA_CARDAPIO -> Telas.TelaCardapio(estado);
                 case VER_PEDIDO -> Telas.VerPedido(estado);
                 case TELA_PAGAMENTO -> Telas.TelaPagamento(estado);

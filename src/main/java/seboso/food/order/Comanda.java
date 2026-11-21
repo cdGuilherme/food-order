@@ -127,9 +127,9 @@ public class Comanda implements ComandaInterface {
             }
             // Se for delivery
             if (delivery) {
-                System.out.println("Frete:\n");
+                System.out.println("\nInformações do frete:");
                 System.out.println(getKm() + "km");
-                System.out.println("Valor Frete: R$" + getValorKm() + "\n");
+                System.out.printf("Valor Frete: R$ %.2f\n", getValorKm());
             }
             // Valor total da compra
             System.out.printf("Total: R$ %.2f\n", calcularTotal() + calcularFrete());
@@ -148,6 +148,7 @@ public class Comanda implements ComandaInterface {
                 }
                 System.out.println();
             }
+            System.out.println();
             // Bebidas
             System.out.println("- Bebidas:");
             for (PedidoBebida atual : bebida) {
@@ -166,7 +167,7 @@ public class Comanda implements ComandaInterface {
             // Se for delivery
             if (delivery) {
                 System.out.println("Frete:\n");
-                System.out.println("Valor Frete: R$" + calcularFrete() + "\n");
+                System.out.printf("Valor Frete: R$ %.2f\n", calcularFrete());
             }
             // Valor total da compra
             System.out.printf("Subtotal: R$ %.2f\n", calcularTotal());
