@@ -39,6 +39,7 @@ public class Utils {
 
 
     // Função de limpar a tela
+    /*
     public static void LimparTela() {
         // Se o terminal conseguir interpretar comandos ANSI, uma limpeza real da tela será feita
         // Suporte limitado se testar no terminal de um IDE ou se usar o cmd do Windows
@@ -46,6 +47,20 @@ public class Utils {
         System.out.flush();
         // "\033[H": posiciona o cursor no início do terminal
         // "\033[2J": limpa a tela
+    }
+     */
+    // Limpa o console caso suportado pelo terminal
+    public static void LimparTela() {
+        try {
+            String sistema = System.getProperty("os.name").toLowerCase();
+            if (sistema.contains("windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (Exception e) {
+            // Não faz nada caso não seja possível limpar o console.
+        }
     }
 
 
