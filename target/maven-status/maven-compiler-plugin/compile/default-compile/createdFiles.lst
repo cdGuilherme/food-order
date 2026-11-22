@@ -1,5 +1,6 @@
 seboso\food\order\EstadoApp$FormasPagamento.class
 seboso\food\order\FoodOrder.class
+seboso\food\order\Cozinha.class
 seboso\food\order\Adicional.class
 seboso\food\order\PedidoLanche.class
 seboso\food\order\ComandaInterface.class

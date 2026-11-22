@@ -14,12 +14,14 @@ public class Cardapio {
         lanches.add(new Lanche(13, "Frango Grelhado", 31.99, "de Batata", "filé de frango", "Muçarela", "Alface americana e cenoura ralada"));
         lanches.add(new Lanche(14, "Vegetariano", 29.99, "Integral", "grão-de-bico", "Coalho", "Rúcula e tomate seco"));
         lanches.add(new Lanche(15, "Smash Duplo", 34.99, "Brioche", "carne bovina smash", "American", "Cebola caramelizada e picles"));
+        lanches.add(new Lanche(16, "Hambúrguer Gourmet", 39.99, "Brioche artesanal", "costela e fraldinha", "Gorgonzola", "Rúcula e cebola roxa"));
 
         adicionais.add(new Adicional(41, "Bacon", 5.99, "Frite o bacon em uma frigideira com peso em cima pra manter reta."));
         adicionais.add(new Adicional(42, "Ovo", 3.99, "Frite o ovo na chapa com a gema no ponto e coloque sobre o hamburguer."));
         adicionais.add(new Adicional(43, "Cebola Empanada", 6.49, "Corte a cebola em anéis, empane e frite em óleo quente até dourar, escorra em papel toalha."));
         adicionais.add(new Adicional(44, "Cheddar Cremoso", 4.99, "Aqueça o cheddar em banho-maria até ficar cremoso e espalhe por cima do hamburguer."));
         adicionais.add(new Adicional(45, "Molho Especial", 2.99, "Misture maionese, mostarda, ketchup e uma pitada de páprica e espalhe no pão."));
+        adicionais.add(new Adicional(46, "Queijo Extra", 3.49, "Coloque uma fatia extra de queijo muçarela sobre o hamburguer ainda na chapa para derreter."));
 
         bebidas.add(new Bebida(21, "Limonada", 15.99, "Bata o limão sem o miolo com casca no liquidificador, coe com uma peneira, e adicione açucar"));
         bebidas.add(new Bebida(22, "Suco de Laranja", 12.99, "Esprema as laranjas, coe para tirar o bagaço e sirva com bastante gelo"));
