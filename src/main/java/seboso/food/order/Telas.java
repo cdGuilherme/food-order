@@ -445,7 +445,10 @@ public class Telas {
         // - Exibir a etapa atual se for cozinha, ou tempo estimado até entrega se saiu da cozinha e for delivery
 
         if (estado.comandaSelecionada != null) {
-            estado.comandaSelecionada.getDescricao(true);
+            // Mesmas informações exibidas em VER_PEDIDO antes do pagamento
+            estado.comandaSelecionada.getDescricao(false);
+
+            System.out.printf("\nTotal: R$ %.2f\n", estado.comandaSelecionada.calcularTotal() + estado.comandaSelecionada.calcularFrete());
         }
 
         Utils.EsperarEnter();
