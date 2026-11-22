@@ -154,7 +154,7 @@ public class Comanda implements ComandaInterface {
             if (delivery) {
                 System.out.println("\nInformações do frete:");
                 System.out.println(getKm() + "km");
-                System.out.printf("Valor Frete: R$ %.2f\n", getValorKm());
+                System.out.printf("Valor Frete: R$ %.2f\n", calcularFrete());
             }
             // Valor total da compra
             System.out.printf("Total: R$ %.2f\n", calcularTotal() + calcularFrete());

@@ -88,20 +88,33 @@ public class Cozinheiro extends Pessoa {
             }
         }
         
+        // Executa uma comanda específica no setor do cozinheiro
+        public void executarComanda(Comanda comanda)
+        {
+            if(this.cozinha != null)
+            {
+                this.cozinha.processarComanda(comanda);
+            }
+            else
+            {
+                System.out.println("Cozinheiro " + this.getNome() + " ainda não está alocado em nenhuma cozinha/setor.");
+            }
+        }
+
         // adicionar comanda
-        // obrigatóriamente vc tem que passar a comanda para ele
+        // obrigatoriamente você tem que passar a comanda para ele
         public void adicionarComanda(Comanda comanda)
         {
             // quando passado, ele verifica se a lista está vazia
             // caso esteja
             if(this.listaComanda == null)
             {
-                // ele inclementa isso
+                // ele cria uma nova lista
                 this.listaComanda = new ArrayList<>();
             }
             
             // caso contrário(aqui seria o else)
-            // ele adicionar o que foi passado para o ArrayList
+            // ele adiciona o que foi passado para o ArrayList
             this.listaComanda.add(comanda);
         }
         

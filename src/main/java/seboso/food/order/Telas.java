@@ -37,7 +37,7 @@ public class Telas {
         System.out.println("<< Novo Pedido >>\n");
 
         // Pede o nome do usuário
-        String nome = Utils.ReceberInputTexto(estado.s, "Por favor informe o seu nome ou digite 0 para voltar: ");
+        String nome = Utils.ReceberInputTexto(estado.s, "Por favor, informe o seu nome ou digite 0 para voltar: ");
         estado.cliente.setNome(nome);
         estado.comanda.setCliente(estado.cliente);
         if (estado.cliente.getNome() == null) {
@@ -62,6 +62,10 @@ public class Telas {
                 }
                 case 2 -> {
                     estado.comanda.setDelivery(false);
+                }
+                case 0 -> {
+                    estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+                    return;
                 }
                 default -> {
                     Utils.PrintOpcaoInvalida();
@@ -177,9 +181,7 @@ public class Telas {
 
         System.out.println("\nSelecione uma opção:");
         System.out.println("1 - Ver pedido");
-        System.out.println("11 a 15 - Escolher um lanche");
-        System.out.println("21 a 25 - Escolher uma bebida ");
-        System.out.println("31 a 35 - Escolher uma sobremesa");
+        System.out.println("Código do item - Adicionar um lanche, bebida ou sobremesa do cardápio");
         System.out.println("0 - Cancelar pedido");
         System.out.print("Sua escolha: ");
         estado.input = Utils.ReceberInputInt();
@@ -203,11 +205,11 @@ public class Telas {
                             System.out.print("Sua escolha: ");
                             estado.input = Utils.ReceberInputInt();
                             // Usuário seleciona um adicional
-                            if (estado.input >= 41 && estado.input <= 45) {
+                            if (cardapio.getAdicional(estado.input) != null) {
                                 pedidoLanche.setAdicionais(cardapio.getAdicional(estado.input));
                                 System.out.println("Adicional adicionado com sucesso!\n");
                             }
-                        } while (estado.input >= 41 && estado.input <= 45);
+                        } while (cardapio.getAdicional(estado.input) != null);
 
                         estado.comanda.setLanche(pedidoLanche);
                     }
@@ -343,11 +345,11 @@ public class Telas {
 
         switch (estado.formaPagamento) {
             case DINHEIRO -> {
-                System.out.println("\nForma de pagamento dinheiro selecionado com sucesso!");
+                System.out.println("\nForma de pagamento dinheiro selecionada com sucesso!");
                 Utils.EsperarEnter();
             }
             case PIX -> {
-                System.out.println("\nPor favor escaneie o QR code para realizar o pagamento:\n");
+                System.out.println("\nPor favor, escaneie o QR code para realizar o pagamento:\n");
                 Telas.DesenharQRcode();
                 System.out.println("Aguardando confirmação...");
                 Utils.EsperarEnter();
@@ -400,7 +402,7 @@ public class Telas {
         // - Deverá também ter a opção do usuário selecionar o pedido pela numeração da comanda para ver detalhes
 
         if (estado.comandas.isEmpty()) {
-            System.out.println("Nenhum pedido finalizado.");
+            System.out.println("Nenhum pedido na fila.");
         } else {
             for (Comanda comanda : estado.comandas) {
                 System.out.printf("%d - Pedido %s - R$ %.2f%n", comanda.getComanda(), comanda.getCliente().getNome(), comanda.calcularTotal() + comanda.calcularFrete());
@@ -458,12 +460,12 @@ public class Telas {
 
         System.out.println("<< Cozinha >>\n");
 
-        System.out.println("Selecione um pedido para ser realizado:\n");
+        System.out.println("Selecione um pedido para ser preparado:\n");
 
         // A tela de cozinha segue a mesma lógica da página de lista de pedidos
 
         if (estado.comandas.isEmpty()) {
-            System.out.println("Nenhum pedido finalizado.");
+            System.out.println("Nenhum pedido na fila.");
         } else {
             for (Comanda comanda : estado.comandas) {
                 System.out.printf("%d - Pedido %s - R$ %.2f%n", comanda.getComanda(), comanda.getCliente().getNome(), comanda.calcularTotal() + comanda.calcularFrete());
@@ -505,7 +507,8 @@ public class Telas {
 
         if (estado.comandaSelecionada != null) {
             // estado.comandaSelecionada.getDescricao(true);
-            estado.exibirPassoAPasso();
+            estado.exibirPassoAPasso(estado.comandaSelecionada);
+            estado.comandaSelecionada = null;
         }
 
         Utils.EsperarEnter();

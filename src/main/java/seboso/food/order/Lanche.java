@@ -25,15 +25,15 @@ public class Lanche extends Produto {
     public void modoPreparo(ArrayList<Adicional> adicionais) {
         System.out.println("Modo de preparo: "+ getNome());
         System.out.println("Pegue o pão "+ getPao() + " parta ao meio e sele na chapa");
-        System.out.println("Pese o hamburguer de "+ getHamburguer() +" e frite na chapa até dourar por fora");
-        System.out.println("Quando estiver perto de acabar o hamburguer, pegue o queijo "+ getQueijo() +"e coloque por cima abafando com uma tampa para derreter");
+        System.out.println("Pese o hambúrguer de "+ getHamburguer() +" e frite na chapa até dourar por fora");
+        System.out.println("Quando estiver perto de acabar o hambúrguer, pegue o queijo "+ getQueijo() +" e coloque por cima abafando com uma tampa para derreter");
         if (!adicionais.isEmpty()) {
             for (Adicional atual : adicionais) {
                 atual.modoPreparo();
             }
         }
-        System.out.println("Pega a salada "+  getSalada());
-        System.out.println("Finaliza montando tudo!");
+        System.out.println("Pegue a salada "+  getSalada());
+        System.out.println("Finalize montando tudo!");
     }
 
     @Override

@@ -110,10 +110,17 @@ public class EstadoApp {
 
 
     // Exibir passo a passo da cozinha
-    public void exibirPassoAPasso() {
-        cozinheiroGrelha.executarFuncao();
-        cozinheiroBar.executarFuncao();
-        cozinheiroConfeitaria.executarFuncao();
+    // Executa a comanda escolhida em todos os setores e a remove do sistema
+    public void exibirPassoAPasso(Comanda comandaExecutada) {
+        cozinheiroGrelha.executarComanda(comandaExecutada);
+        cozinheiroBar.executarComanda(comandaExecutada);
+        cozinheiroConfeitaria.executarComanda(comandaExecutada);
+
+        // Pedido executado não pode mais ser acessado
+        filaComanda.remove(comandaExecutada);
+        comandas.remove(comandaExecutada);
+
+        System.out.println("Pedido " + comandaExecutada.getComanda() + " executado e removido da lista de pedidos.");
     }
 
 

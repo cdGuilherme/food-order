@@ -7,8 +7,8 @@ public class Cozinha {
     
     private String setor;
     
-    // construtor da classe Cozinheiro
-    // passando como parametros os dois que temos
+    // construtor da classe Cozinha
+    // passando como parâmetros os dois que temos
     Cozinha(Cozinheiro cozinheiro, String setor)
     {
         setCozinheiro(cozinheiro);
@@ -46,68 +46,88 @@ public class Cozinha {
     ////////////////////////////////////////////////////////////////////////////////////
     
     
-    // verificar qual setor é
-    
+    // Processa a primeira comanda da fila deste setor
     public void processarProximoComanda()
     {
         ArrayList<Comanda> lista = this.cozinheiro.getListaComanda();
-        
+
         if(lista == null || lista.isEmpty())
         {
             System.out.println("Setor " + this.setor + " (" + this.cozinheiro.getNome() + "): Não há pedidos na fila.");
             return;
         }
-        
-        // pegar o primeiro da fila
-        Comanda comandaAtual = lista.get(0);
-        
+
+        processarComanda(lista.get(0));
+    }
+
+    // Processa uma comanda específica neste setor
+    public void processarComanda(Comanda comandaAtual)
+    {
+        ArrayList<Comanda> lista = this.cozinheiro.getListaComanda();
+
         System.out.println("Setor: " + this.setor + " || Cozinheiro: " + this.cozinheiro.getNome());
-        
-        System.out.println("Iniciando O Comando " + comandaAtual.getComanda());
-        
+
+        System.out.println("Iniciando a comanda " + comandaAtual.getComanda());
+
         switch(this.setor.toLowerCase())
         {
             case "grelha":
+                if(comandaAtual.getLanches().isEmpty())
+                {
+                    System.out.println("Nenhum item para este setor.");
+                }
+
                 for(PedidoLanche grelha : comandaAtual.getLanches())
                 {
                     grelha.fazerLanche();
                 }
-                
+
                 comandaAtual.setGrelhaFinalizada(true);
             break;
-            
+
             case "bar":
+                if(comandaAtual.getBebida().isEmpty())
+                {
+                    System.out.println("Nenhum item para este setor.");
+                }
+
                 for(PedidoBebida bebidas : comandaAtual.getBebida())
                 {
                     System.out.println("Preparando bebida (" + bebidas.getTamanho() + "): " + bebidas.getBebida().getNome());
                     bebidas.getBebida().modoPreparo();
                 }
-                
+
                 comandaAtual.setBarFinalizado(true);
             break;
-            
+
             case "confeitaria":
+                if(comandaAtual.getSobremesa().isEmpty())
+                {
+                    System.out.println("Nenhum item para este setor.");
+                }
+
                 for (PedidoSobremesa sobremesa : comandaAtual.getSobremesa()) {
                     sobremesa.fazerSobremesa();
                 }
-                
+
                 comandaAtual.setConfeitariaFinalizada(true);
             break;
-            
+
             default:
                 System.out.println("Não temos esse setor");
-                
+
             return;
         }
 
         System.out.println("Setor " + this.setor + " concluiu seu trabalho na Comanda " + comandaAtual.getComanda() + ".");
-        
+
         if (comandaAtual.isFinish()) {
-            lista.remove(0);
+            if (lista != null) {
+                lista.remove(comandaAtual);
+            }
             System.out.println("Comanda " + comandaAtual.getComanda() + " finalizada e removida da fila!\n");
         } else {
             System.out.println("Comanda " + comandaAtual.getComanda() + " permanece na fila aguardando os demais setores.\n");
         }
-        
     }
 }
