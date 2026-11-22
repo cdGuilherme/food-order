@@ -14,6 +14,7 @@ public class Telas {
         System.out.println("Por favor, selecione uma opção:");
         System.out.println("1 - Iniciar um novo pedido");
         System.out.println("2 - Ver a lista de pedidos");
+        System.out.println("3 - Ver cozinha");
         System.out.println("0 - Sair");
         System.out.print("Sua escolha: ");
         estado.input = Utils.ReceberInputInt();
@@ -21,6 +22,7 @@ public class Telas {
         switch (estado.input) {
             case 1 -> estado.telaAtual = EstadoApp.Tela.NOVO_PEDIDO;
             case 2 -> estado.telaAtual = EstadoApp.Tela.LISTA_PEDIDOS;
+            case 3 -> estado.telaAtual = EstadoApp.Tela.COZINHA;
             case 0 -> estado.telaAtual = EstadoApp.Tela.SAIR;
             default -> Utils.PrintOpcaoInvalida();
         }
@@ -439,6 +441,65 @@ public class Telas {
         // OBS DETALHES DO PEDIDO:
         // - Aqui deve ter as informações do pedido
         // - Exibir a etapa atual se for cozinha, ou tempo estimado até entrega se saiu da cozinha e for delivery
+
+        if (estado.comandaSelecionada != null) {
+            estado.comandaSelecionada.getDescricao(true);
+        }
+
+        Utils.EsperarEnter();
+        estado.telaAtual = EstadoApp.Tela.LISTA_PEDIDOS;
+    }
+
+
+    // Tela de lista de pedidos da cozinha
+    public static void Cozinha(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Cozinha >>\n");
+
+        // A tela de cozinha segue a mesma lógica da página de lista de pedidos
+
+        if (estado.comandas.isEmpty()) {
+            System.out.println("Nenhum pedido finalizado.");
+        } else {
+            for (Comanda comanda : estado.comandas) {
+                System.out.printf("%d - Pedido %s - R$ %.2f%n", comanda.getComanda(), comanda.getCliente().getNome(), comanda.calcularTotal() + comanda.calcularFrete());
+            }
+        }
+
+        System.out.print("\nSelecione um pedido pela comanda ou digite 0 para sair: ");
+        estado.input = Utils.ReceberInputInt();
+
+        if (estado.input == 0) {
+            estado.telaAtual = EstadoApp.Tela.TELA_INICIAL;
+            return;
+        }
+
+        estado.comandaSelecionada = null;
+        for (Comanda comanda : estado.comandas) {
+            if (comanda.getComanda() == estado.input) {
+                estado.comandaSelecionada = comanda;
+                break;
+            }
+        }
+
+        if (estado.comandaSelecionada != null) {
+            estado.telaAtual = EstadoApp.Tela.DETALHES_COZINHA;
+        } else {
+            Utils.PrintOpcaoInvalida();
+        }
+    }
+
+
+    // Tela de detalhes do pedido com instruções de preparo da cozinha
+    public static void DetalhesCozinha(EstadoApp estado) {
+        Utils.LimparConsole(estado);
+        Telas.DesenharLogo();
+
+        System.out.println("<< Detalhes da Cozinha >>\n");
+
+        // A tela de detalhes da cozinha segue a mesma lógica da tela de detalhes do pedido, mas com as instruções de preparo
 
         if (estado.comandaSelecionada != null) {
             estado.comandaSelecionada.getDescricao(true);

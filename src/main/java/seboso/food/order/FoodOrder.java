@@ -18,6 +18,8 @@ public class FoodOrder {
                 case TELA_PAGAMENTO -> Telas.TelaPagamento(estado);
                 case LISTA_PEDIDOS -> Telas.ListaPedidos(estado);
                 case DETALHES_PEDIDO -> Telas.DetalhesPedido(estado);
+                case COZINHA -> Telas.Cozinha(estado);
+                case DETALHES_COZINHA -> Telas.DetalhesCozinha(estado);
             }
         }
     }
