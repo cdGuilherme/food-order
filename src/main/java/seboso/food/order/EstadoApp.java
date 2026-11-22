@@ -100,10 +100,23 @@ public class EstadoApp {
             + " encaminhada para a cozinha!"
         );
 
+        /*
+        cozinheiroGrelha.executarFuncao();
+        cozinheiroBar.executarFuncao();
+        cozinheiroConfeitaria.executarFuncao();
+
+         */
+    }
+
+
+    // Exibir passo a passo da cozinha
+    public void exibirPassoAPasso() {
         cozinheiroGrelha.executarFuncao();
         cozinheiroBar.executarFuncao();
         cozinheiroConfeitaria.executarFuncao();
     }
+
+
     // Limpa os dados do pedido do usuário
     public void LimparDadosPedido() {
         comanda = new Comanda(qtdPedidos + 1);

@@ -458,6 +458,8 @@ public class Telas {
 
         System.out.println("<< Cozinha >>\n");
 
+        System.out.println("Selecione um pedido para ser realizado:\n");
+
         // A tela de cozinha segue a mesma lógica da página de lista de pedidos
 
         if (estado.comandas.isEmpty()) {
@@ -502,11 +504,12 @@ public class Telas {
         // A tela de detalhes da cozinha segue a mesma lógica da tela de detalhes do pedido, mas com as instruções de preparo
 
         if (estado.comandaSelecionada != null) {
-            estado.comandaSelecionada.getDescricao(true);
+            // estado.comandaSelecionada.getDescricao(true);
+            estado.exibirPassoAPasso();
         }
 
         Utils.EsperarEnter();
-        estado.telaAtual = EstadoApp.Tela.LISTA_PEDIDOS;
+        estado.telaAtual = EstadoApp.Tela.COZINHA;
     }
 
 
